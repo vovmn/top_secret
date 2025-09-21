@@ -1,13 +1,10 @@
 <template>
+  <SideBar />
   <v-main>
-    <router-view />
+    <slot />
   </v-main>
-
-  <FooterLaout />
 </template>
 
 <script lang="ts" setup>
-import FooterLaout from './FooterLaout.vue';
-
-  //
+import SideBar from '@/components/SideBar.vue';
 </script>
