@@ -1,5 +1,6 @@
 ﻿using COM.API.Domain.Enums;
 using COM.API.Domain.ValueObjects;
+using System.ComponentModel.DataAnnotations;
 
 namespace COM.API.Domain.Entities
 {
@@ -19,12 +20,14 @@ namespace COM.API.Domain.Entities
         /// <summary>
         /// Название объекта благоустройства (например, "Парк Горького, сектор А").
         /// </summary>
-        public required string Name { get; init; }
+        [Required]
+        public string Name { get; private set; }
 
         /// <summary>
         /// Физический адрес объекта.
         /// </summary>
-        public required string Address { get; init; }
+        [Required]
+        public string Address { get; private set; }
 
         /// <summary>
         /// Текущий статус жизненного цикла объекта (Planned, Active, Completed).
@@ -46,7 +49,7 @@ namespace COM.API.Domain.Entities
         /// Географический полигон, задающий границы рабочей зоны объекта.
         /// Используется для верификации присутствия пользователей на объекте (требование ТЗ п.3).
         /// </summary>
-        public required GeoPolygon Polygon { get; init; }
+        public GeoPolygon Polygon { get; private set; }
 
         /// <summary>
         /// Коллекция ответственных лиц, назначенных на объект (Прораб, Инспекторы СК и КО).
@@ -81,9 +84,9 @@ namespace COM.API.Domain.Entities
             DateTime? endDate = null)
         {
             Id = id;
-            Name = name;
-            Address = address;
-            Polygon = polygon;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            Address = address ?? throw new ArgumentNullException(nameof(address));
+            Polygon = polygon ?? throw new ArgumentNullException(nameof(polygon));
             Status = ObjectStatus.Planned; // Новый объект всегда в статусе "Планируется"
             StartDate = startDate;
             EndDate = endDate;
@@ -141,6 +144,11 @@ namespace COM.API.Domain.Entities
         /// <summary>
         /// Приватный конструктор для EF Core
         /// </summary>
-        private ConstructionObject() { }
+        private ConstructionObject() 
+        {
+            Name = string.Empty; 
+            Address = string.Empty;
+            Polygon = new GeoPolygon([new(0, 0), new(0, 1), new(1, 1), new(0, 0)]); 
+        }
     }
 }

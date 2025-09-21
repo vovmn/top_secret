@@ -8,12 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.9" />
+    <PackageReference Include="NetTopologySuite" Version="2.6.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="RabbitMQ.Client" Version="7.1.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Services\" />
-    <Folder Include="Application\Interfaces\" />
     <Folder Include="DTOs\Requests\" />
     <Folder Include="DTOs\Responses\" />
     <Folder Include="Infrastructure\Data\Configurations\" />
