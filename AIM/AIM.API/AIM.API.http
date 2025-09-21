@@ -1,0 +1,6 @@
+@AIM.API_HostAddress = http://localhost:5129
+
+GET {{AIM.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
