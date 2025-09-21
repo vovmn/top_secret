@@ -197,3 +197,7 @@ config.local.js
 *.tar.gz
 *.exe
 *.dll
+/.vs
+/AIM/.vs/AIM
+/AIM
+/COM/.vs/COM
