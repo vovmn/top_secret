@@ -1,6 +1,7 @@
 <template>
   <DefaultLayout>
     <v-container grid-list-xs>
+      <h1 class="font-weight-bold">Объекты</h1>
       <v-card>
         <v-tabs v-model="tab" color="primary" dark slider-color="primary" align-tabs="center" window>
           <v-tab :value="1">
@@ -19,7 +20,7 @@
             <v-container fluid>
               <v-row>
                 <v-col v-for="i in 6" :key="i" cols="12" md="4">
-                  Объект {{ i }} вкладка {{ n }}
+                  <HomeObjectCard :title="`Объект ${i}`" :location="`${n}`" :date-review="`01.01.2025`"></HomeObjectCard>
                 </v-col>
               </v-row>
             </v-container>
@@ -32,6 +33,7 @@
 
 <script lang="ts" setup>
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
+import HomeObjectCard from '@/components/features/home/HomeObjectCard.vue';
 
 const tab = ref(1)
 </script>

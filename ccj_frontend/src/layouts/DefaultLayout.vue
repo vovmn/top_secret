@@ -6,5 +6,5 @@
 </template>
 
 <script lang="ts" setup>
-import SideBar from '@/components/SideBar.vue';
+import SideBar from '@/components/shared/SideBar.vue';
 </script>
