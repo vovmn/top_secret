@@ -1,10 +1,10 @@
 <template>
   <DefaultLayout>
-    <v-container>
+    <BaseContainer>
       <h1 class="font-weight-bold mb-4">Настройки</h1>
       <v-switch v-model="isDarkTheme" color="success" hide-details label="Темная тема" />
       <v-switch v-model="getNotifications" color="success" hide-details label="Получать уведомления" />
-    </v-container>
+    </BaseContainer>
   </DefaultLayout>
 </template>
 

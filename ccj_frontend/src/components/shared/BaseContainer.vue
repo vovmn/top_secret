@@ -1,0 +1,13 @@
+<template>
+	<v-container class="ms-10">
+		<slot />
+	</v-container>
+</template>
+
+<script setup lang="ts">
+
+</script>
+
+<style scoped lang="sass">
+
+</style>

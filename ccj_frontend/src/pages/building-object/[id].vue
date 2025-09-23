@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <v-container>
+    <BaseContainer>
       <h1 class="font-weight-bold mb-8">Объект #{{ id }}</h1>
       <h2 class="mb-4 text-grey-darken-2">Сетевой график</h2>
       <v-row>
@@ -17,7 +17,7 @@
           </v-table>
         </v-col>
       </v-row>
-    </v-container>
+    </BaseContainer>
   </DefaultLayout>
 </template>
 
