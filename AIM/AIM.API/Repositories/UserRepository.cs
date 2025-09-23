@@ -29,9 +29,23 @@ namespace AIM.API.Repositories
             await Task.CompletedTask;
         }
 
+        public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            User? user = await context.Users
+                .FirstOrDefaultAsync(co => co.Id == id, cancellationToken);
+            if (user == null)
+                return false;
+            context.Users.Remove(user);
+
+            await context.SaveChangesAsync(cancellationToken);
+            return true;
+        }
+
         public async Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default)
         {
             return await context.Users.AnyAsync(co => co.Id == id, cancellationToken);
         }
+
+        // ADD VALIDATION
     }
 }

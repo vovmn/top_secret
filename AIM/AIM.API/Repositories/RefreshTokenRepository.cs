@@ -1,37 +1,44 @@
 ﻿using AIM.API.Data;
 using AIM.API.Models.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace AIM.API.Repositories
 {
     public class RefreshTokenRepository(ApplicationDbContext context)
     {
-        public async Task<RefreshToken?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task<RefreshToken?> GetByTokenAsync(string token, CancellationToken cancellationToken = default)
         {
-            return await context.Users
-                .FirstOrDefaultAsync(co => co.Id == id, cancellationToken);
+            return await context.RefreshTokens
+                .FirstOrDefaultAsync(co => co.Token == token, cancellationToken);
         }
 
-        public async Task<RefreshToken?> GetByUserNameAsync(string userName, CancellationToken cancellationToken = default)
+        public async Task AddAsync(RefreshToken refreshToken, CancellationToken cancellationToken = default)
         {
-            return await context.Users
-                .FirstOrDefaultAsync(co => co.UserName == userName || co.EMail == userName || co.PhoneNumber == userName, cancellationToken);
+            await context.RefreshTokens.AddAsync(refreshToken, cancellationToken);
         }
 
-        public async Task AddAsync(RefreshToken user, CancellationToken cancellationToken = default)
+        public async Task UpdateAsync(RefreshToken refreshToken, CancellationToken cancellationToken = default)
         {
-            await context.Users.AddAsync(user, cancellationToken);
-        }
-
-        public async Task UpdateAsync(RefreshToken user, CancellationToken cancellationToken = default)
-        {
-            context.Users.Update(user);
+            context.RefreshTokens.Update(refreshToken);
             await Task.CompletedTask;
+        }
+
+        public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            RefreshToken? refreshToken = await context.RefreshTokens
+                .FirstOrDefaultAsync(co => co.Id == id, cancellationToken);
+            if (refreshToken == null)
+                return false;
+            context.RefreshTokens.Remove(refreshToken);
+
+            await context.SaveChangesAsync(cancellationToken);
+            return true;
         }
 
         public async Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            return await context.Users.AnyAsync(co => co.Id == id, cancellationToken);
+            return await context.RefreshTokens.AnyAsync(co => co.Id == id, cancellationToken);
         }
     }
 }

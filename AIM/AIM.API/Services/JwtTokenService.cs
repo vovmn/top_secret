@@ -31,11 +31,12 @@ namespace AIM.API.Services
         }
         public async Task<LoginResponseDto?> ValidateRefreshToken(string token)
         {
-            RefreshToken refreshToken = await refreshTokenRepository.GetByIdAsync(token);
-            if (refreshToken is null || refreshToken.Expire < DateTime.UtcNow) return null;
-            await refreshTokenRepository.Delete(refreshToken);
+            RefreshToken? refreshToken = await refreshTokenRepository.GetByTokenAsync(token);
+            if (refreshToken is null || refreshToken.Expires < DateTime.UtcNow) return null;
+            await refreshTokenRepository.DeleteAsync(refreshToken.Id);
             var user = await userRepository.GetByIdAsync(refreshToken.Id);
             if (user is null) return null;
+
             return await GenerateJwtToken(user);
         }
 
@@ -50,7 +51,7 @@ namespace AIM.API.Services
                 ],
                 expires: DateTime.UtcNow.AddMinutes(configuration.GetValue<int>("JwtConfig:TokenValidityMins")),
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["JwtConfig:Key"])),
-                SecurityAlgorithms.RsaSsaPssSha256));
+                SecurityAlgorithms.HmacSha512Signature));
 
             JwtSecurityTokenHandler tokenHandler = new();
 
@@ -69,7 +70,7 @@ namespace AIM.API.Services
             var refreshToken = new RefreshToken
             {
                 Token = Guid.NewGuid().ToString(),
-                Expire = DateTime.UtcNow.AddMinutes(reftokvalmins),
+                Expires = DateTime.UtcNow.AddMinutes(reftokvalmins),
                 Id = userId
             };
             await refreshTokenRepository.AddAsync(refreshToken);

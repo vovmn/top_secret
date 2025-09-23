@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AIM.API.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace AIM.API.Models.Entities
 {
@@ -10,7 +11,7 @@ namespace AIM.API.Models.Entities
         public Guid Id { get; private set; }
 
         /// <summary>
-        /// Название объекта благоустройства (например, "Парк Горького, сектор А").
+        /// Возможные лоигны для аутентификации пользователя.
         /// </summary>
         [Required]
         public string UserName { get; private set; }
@@ -21,34 +22,32 @@ namespace AIM.API.Models.Entities
 
 
         /// <summary>
-        /// Физический адрес объекта.
+        /// Пароль от аккаунта.
         /// </summary>
         [Required]
         public string Password { get; private set; }
 
         /// <summary>
-        /// Текущий статус жизненного цикла объекта (Planned, Active, Completed).
-        /// Согласно ТЗ, объект должен быть активирован перед началом работ.
+        /// Имя.
         /// </summary>
         [Required]
         public string Name { get; private set; }
 
         /// <summary>
-        /// Плановая дата начала работ на объекте.
+        /// Фамилия.
         /// </summary>
         [Required]
         public string Sername { get; private set; }
 
         /// <summary>
-        /// Плановая дата окончания работ на объекте.
+        /// Отчество.
         /// </summary>
         public string Fathername { get; private set; }
         
         public string Messangers { get; private set; }
 
         /// <summary>
-        /// Географический полигон, задающий границы рабочей зоны объекта.
-        /// Используется для верификации присутствия пользователей на объекте (требование ТЗ п.3).
+        /// Роль пользователя в системе.
         /// </summary>
         [Required]
         public Role Priveleges { get; private set; }
@@ -59,7 +58,7 @@ namespace AIM.API.Models.Entities
             UserName = userName;
             EMail = eMail;
             PhoneNumber = phoneNumber;
-            Password = password;
+            Password = PasswordHasherService.HashPassword(password);
             Name = name;
             Sername = sername;
             Fathername = fathername;

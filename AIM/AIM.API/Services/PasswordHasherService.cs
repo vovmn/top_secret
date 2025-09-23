@@ -18,7 +18,7 @@
             if (string.IsNullOrEmpty(password))
                 throw new ArgumentException("Пароль не может быть пустым");
 
-            return BCrypt.Net.BCrypt.HashPassword(password, WorkFactor);
+            return BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt(12));
         }
 
         /// <summary>
@@ -30,7 +30,7 @@
         public static bool VerifyPassword(string password, string hash)
         {
             if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(hash))
-                throw new ArgumentException("Пароль и хеш не могут быть пустыми");
+                throw new ArgumentException("Пароль не может быть пустым или отсутствовать в бд");
 
             return BCrypt.Net.BCrypt.Verify(password, hash);
         }

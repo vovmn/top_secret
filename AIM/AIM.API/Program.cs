@@ -19,10 +19,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Setting up db
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration["DbConnection"]));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"),
+        o => o.UseNetTopologySuite()
+        ));
 
 builder.Services.AddScoped<UserRepository>();
-builder.Services.AddScoped<RefreshToken>();
+builder.Services.AddScoped<RefreshTokenRepository>();
 
 // Setting up jwt
 builder.Services.AddAuthentication(options =>
