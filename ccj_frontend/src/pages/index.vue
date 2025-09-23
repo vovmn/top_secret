@@ -2,7 +2,7 @@
   <DefaultLayout>
     <v-container>
       <h1 class="font-weight-bold mb-4">Объекты</h1>
-      <v-card class="pa-4" elevation="2">
+      <v-card color="background" class="pa-4" elevation="0">
         <v-row align="center" align-content="center" class="ma-4">
           <v-col cols="12" lg="3" md="4" sm="6">
             <HomeSearch v-model="search" />
@@ -13,7 +13,6 @@
               v-model="tab"
               align-tabs="center"
               color="primary"
-              dark
               slider-color="primary"
               window
             >
@@ -47,7 +46,7 @@
 </template>
 
 <script lang="ts" setup>
-  import HomeObjectCard from '@/components/features/home/HomeObjectCard.vue'
+import HomeObjectCard from '@/components/features/home/HomeObjectCard.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
 const tab = ref(1)
