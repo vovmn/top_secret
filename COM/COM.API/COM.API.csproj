@@ -18,8 +18,6 @@
     <Folder Include="DTOs\Requests\" />
     <Folder Include="DTOs\Responses\" />
     <Folder Include="Infrastructure\Data\Configurations\" />
-    <Folder Include="Infrastructure\Repositories\" />
-    <Folder Include="Infrastructure\Interfaces\" />
     <Folder Include="Infrastructure\Integration\" />
     <Folder Include="Profiles\" />
     <Folder Include="Extensions\" />
