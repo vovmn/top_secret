@@ -1,0 +1,103 @@
+name: Safe Deploy COM System
+
+on:
+  push:
+    branches: [ "COM" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        ref: COM
+
+    - name: Deploy with rollback capability
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          set -e
+          
+          cd /opt
+          TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+          
+          echo "=== 1. Backup existing version ==="
+          if [ -d "construction-management" ]; then
+            cp -r construction-management construction-management-backup-$TIMESTAMP
+            echo "✅ Backup created: construction-management-backup-$TIMESTAMP"
+          fi
+          
+          echo "=== 2. Prepare new version ==="
+          rm -rf construction-management-new
+          mkdir -p construction-management-new
+          
+          # Здесь будет копирование файлов через scp
+          # Временная заглушка - создаем структуру
+          mkdir -p construction-management-new/COM.API
+          echo "Waiting for files..."
+          
+          echo "=== 3. Copy project files ==="
+          # Файлы будут скопированы через отдельный step scp
+
+    - name: Copy project files
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        source: "."
+        target: "/opt/construction-management-new"
+        strip_components: 0
+
+    - name: Complete deployment
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          set -e
+          cd /opt
+          
+          echo "=== 4. Switch to new version ==="
+          mv construction-management construction-management-old 2>/dev/null || true
+          mv construction-management-new construction-management
+          cd construction-management
+          
+          echo "=== 5. Deploy new version ==="
+          docker-compose down || true
+          docker-compose build --no-cache
+          docker-compose up -d db
+          
+          # Wait for database
+          for i in {1..30}; do
+            if docker-compose exec -T db pg_isready -U postgres; then
+              break
+            fi
+            sleep 2
+          done
+          
+          docker-compose run --rm migrator
+          docker-compose up -d com.api
+          
+          echo "=== 6. Verify deployment ==="
+          sleep 30
+          if curl -f http://localhost:8081/health; then
+            echo "✅ Deployment successful!"
+            # Cleanup old backup
+            rm -rf /opt/construction-management-old
+          else
+            echo "❌ Deployment failed, rolling back..."
+            cd /opt
+            mv construction-management construction-management-failed
+            mv construction-management-old construction-management || true
+            cd construction-management
+            docker-compose up -d
+            exit 1
+          fi
