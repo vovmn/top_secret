@@ -3,9 +3,9 @@
     <BaseContainer>
       <h1 class="font-weight-bold mb-8">Объект #{{ id }}</h1>
       <h2 class="mb-4 text-grey-darken-2">Сетевой график</h2>
-      <v-row>
-        <v-col cols="12" sm="10" md="8" lg="6">
-          <v-table striped="even" density="compact" class="rounded-sm table-narrow border">
+      <v-row justify="space-between">
+        <v-col cols="12" sm="12" md="7" lg="7">
+          <v-table striped="even" density="compact" class="rounded-sm border">
             <tbody>
               <tr v-for="(row, key) in tableHeadersAndKeys" :key="key">
                 <td :style="`background-color: ${colors.secondary}`" class="text-white">
@@ -15,6 +15,10 @@
               </tr>
             </tbody>
           </v-table>
+        </v-col>
+        <v-col cols="12" sm="12" md="4" lg="4">
+          <BuildingObjectContact class="mb-4" v-for="contact in contacts" :title="contact.title" :subtitle="contact.subtitle"
+            :src="contact.src" />
         </v-col>
       </v-row>
     </BaseContainer>
@@ -54,12 +58,22 @@ const tableData = {
   volume: '45.5',
   unit: 'м³'
 }
+
+const contacts = [
+  {
+    title: "Иван Иванов",
+    subtitle: "Заказчик",
+    src: "https://cdn.vuetifyjs.com/images/john.png"
+  },
+  {
+    title: "Петр Петров",
+    subtitle: "Инспектор",
+    src: "https://cdn.vuetifyjs.com/images/john.png"
+  },
+  
+] satisfies { title: string, subtitle: string, src: string }[];
 </script>
 
 <style scoped lang="sass">
-.table-narrow 
-  /* Отключаем растягивание таблицы */
-  width: fit-content;
-  max-width: 100%;
-  table-layout: auto;
+
 </style>

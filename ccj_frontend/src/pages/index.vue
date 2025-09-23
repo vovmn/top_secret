@@ -2,8 +2,8 @@
   <DefaultLayout>
     <BaseContainer>
       <h1 class="font-weight-bold mb-4">Объекты</h1>
-      <v-card color="background" class="pa-4" elevation="0">
-        <v-row align="center" align-content="center" class="ma-4">
+      <v-card color="background" class="pt-4" elevation="0">
+        <v-row align="center" align-content="center">
           <v-col cols="12" lg="3" md="4" sm="6">
             <HomeSearch v-model="search" />
           </v-col>
@@ -47,8 +47,9 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import { useTheme } from 'vuetify';
 
 const theme = useTheme();
-const primaryToAccentWhenDarkTheme = computed(() => theme.current.value.dark ? 'accent' : 'primary');
+const isDark = theme.current.value.dark;
+const primaryToAccentWhenDarkTheme = computed(() => isDark ? 'accent' : 'primary');
 
-const tab = ref(1)
-const search = ref('')
+const tab = ref(1);
+const search = ref('');
 </script>
