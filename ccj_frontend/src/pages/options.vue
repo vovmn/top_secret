@@ -7,7 +7,6 @@
         color="success"
         hide-details
         label="Темная тема"
-        @click="theme.toggle()"
       />
     </v-container>
   </DefaultLayout>
@@ -27,13 +26,6 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
       const newTheme = value ? 'dark' : 'light'
       theme.global.name.value = newTheme
       localStorage.setItem('app-theme', newTheme)
-    }
-})
-
-onMounted(() => {
-    const savedTheme = localStorage.getItem('app-theme') as 'light' | 'dark' | null
-    if (savedTheme) {
-      theme.global.name.value = savedTheme
     }
 })
 </script>

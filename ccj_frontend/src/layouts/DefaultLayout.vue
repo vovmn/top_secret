@@ -6,15 +6,15 @@
 </template>
 
 <script lang="ts" setup>
-  import SideBar from '@/components/shared/SideBar.vue'
-import { useTheme } from 'vuetify'
+import SideBar from '@/components/shared/SideBar.vue'
+import { useTheme } from 'vuetify';
 
-const theme = useTheme()
+const theme = useTheme();
 
-  onMounted(() => {
+onMounted(() => {
     const savedTheme = localStorage.getItem('app-theme') as 'light' | 'dark' | null
     if (savedTheme) {
       theme.global.name.value = savedTheme
     }
-  })
+})
 </script>
