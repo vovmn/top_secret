@@ -2,21 +2,28 @@
   <DefaultLayout>
     <v-container>
       <h1 class="font-weight-bold mb-4">Объекты</h1>
-      <v-card elevation="2" class="pa-4">
+      <v-card class="pa-4" elevation="2">
         <v-row align="center" align-content="center" class="ma-4">
-          <v-col cols="12" sm="6" md="4" lg="3">
-            <HomeSearch v-model="search"></HomeSearch>
+          <v-col cols="12" lg="3" md="4" sm="6">
+            <HomeSearch v-model="search" />
           </v-col>
 
           <v-col cols="6">
-            <v-tabs v-model="tab" color="primary" dark slider-color="primary" align-tabs="center" window>
-              <v-tab :value="1" class="mr-4">
+            <v-tabs
+              v-model="tab"
+              align-tabs="center"
+              color="primary"
+              dark
+              slider-color="primary"
+              window
+            >
+              <v-tab class="mr-4" :value="1">
                 Активирован
               </v-tab>
-              <v-tab :value="2" class="mr-4">
+              <v-tab class="mr-4" :value="2">
                 На контроле
               </v-tab>
-              <v-tab :value="3" class="">
+              <v-tab class="" :value="3">
                 Завершен
               </v-tab>
             </v-tabs>
@@ -28,8 +35,7 @@
             <v-container fluid>
               <v-row>
                 <v-col v-for="i in 6" :key="i" cols="12" md="4">
-                  <HomeObjectCard :title="`Объект ${i}`" :location="`${n}`" :date-review="`01.01.2025`">
-                  </HomeObjectCard>
+                  <HomeObjectCard :date-review="`01.01.2025`" :location="`${n}`" :title="`Объект ${i}`" />
                 </v-col>
               </v-row>
             </v-container>
@@ -41,9 +47,9 @@
 </template>
 
 <script lang="ts" setup>
-import HomeObjectCard from '@/components/features/home/HomeObjectCard.vue';
-import DefaultLayout from '@/layouts/DefaultLayout.vue';
+  import HomeObjectCard from '@/components/features/home/HomeObjectCard.vue'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-const tab = ref(1);
-const search = ref('');
+const tab = ref(1)
+const search = ref('')
 </script>

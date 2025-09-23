@@ -1,6 +1,13 @@
 <template>
-	<v-text-field v-model="model" label="Поиск по объектам" variant="outlined" density="comfortable" clearable
-		hide-details prepend-inner-icon="mdi-magnify"></v-text-field>
+  <v-text-field
+    v-model="model"
+    clearable
+    density="comfortable"
+    hide-details
+    label="Поиск по объектам"
+    prepend-inner-icon="mdi-magnify"
+    variant="outlined"
+  />
 </template>
 
 <script setup lang="ts">
