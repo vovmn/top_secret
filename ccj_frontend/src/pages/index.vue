@@ -34,7 +34,7 @@
             <v-container fluid>
               <v-row>
                 <v-col v-for="i in 6" :key="i" cols="12" md="4">
-                  <HomeObjectCard :date-review="`01.01.2025`" :location="`${n}`" :title="`Объект ${i}`" />
+                  <HomeObjectCard :title="`Объект ${i}`" :location="`${n}`" :date-review="`01.01.2025`" :to="`/building-object/${i}`"/>
                 </v-col>
               </v-row>
             </v-container>

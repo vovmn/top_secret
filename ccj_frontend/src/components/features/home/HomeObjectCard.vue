@@ -15,7 +15,7 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-btn class="ml-2" variant="flat" color="accent" size="small" text="Перейти" />
+      <v-btn class="ml-2" variant="flat" color="accent" size="small" text="Перейти" :to="to"/>
     </v-card-actions>
   </v-card>
 </template>
@@ -25,6 +25,7 @@ defineProps<{
   title: string
   location: string
   dateReview: string
+  to?: string
 }>()
 </script>
 
