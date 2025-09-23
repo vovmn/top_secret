@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AIM.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class AccountControlelr(JwtTokenService jwtTokenService) : ControllerBase
+    public class AccountController(JwtTokenService jwtTokenService) : ControllerBase
     {
         // POST api/Login
         [HttpPost("Login")]
@@ -23,7 +23,7 @@ namespace AIM.API.Controllers
         // POST api/RefreshToken
         [HttpPost("RefreshToken")]
         [AllowAnonymous]
-        public async Task<ActionResult<LoginResponseDto>> RefreshToken([FromBody] RefreshTokenModel request)
+        public async Task<ActionResult<LoginResponseDto>> RefreshToken([FromBody] RefreshTokenRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Token))
                 return BadRequest("Invalid Token");

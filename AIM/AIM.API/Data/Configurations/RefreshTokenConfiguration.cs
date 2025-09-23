@@ -8,9 +8,10 @@ namespace AIM.API.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<RefreshToken> builder)
         {
-            builder.ToTable("refreshtokens");
+            builder.ToTable("refresh_tokens");
 
             builder.HasKey(co => co.Id);
+
             builder.Property(co => co.Id).HasColumnName("id").IsRequired();
             builder.Property(co => co.Token).HasColumnName("token").IsRequired();
             builder.Property(co => co.Expires).HasColumnName("expires").IsRequired();

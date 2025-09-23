@@ -3,81 +3,40 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AIM.API.Models.Entities
 {
-    public class User
+    public class User(Guid id, LoginInfo loginInfo, string password, FIO fIO, Messangers messangers, Roles priveleges)
     {
+
         /// <summary>
         /// Уникальный идентификатор объекта.
         /// </summary>
-        public Guid Id { get; private set; }
+        public Guid Id { get; private set; } = id;
 
         /// <summary>
-        /// Возможные лоигны для аутентификации пользователя.
+        /// Возможные логины для аутентификации пользователя.
         /// </summary>
-        [Required]
-        public string UserName { get; private set; }
-
-        public string EMail { get; private set; }
-
-        public string PhoneNumber { get; private set; }
-
+        public LoginInfo LoginInfo { get; private set; } = loginInfo;
 
         /// <summary>
         /// Пароль от аккаунта.
         /// </summary>
         [Required]
-        public string Password { get; private set; }
+        public string Password { get; private set; } = password;
 
         /// <summary>
-        /// Имя.
+        /// Фио пользователя
         /// </summary>
-        [Required]
-        public string Name { get; private set; }
+        public FIO FIO { get; private set; } = fIO;
 
         /// <summary>
-        /// Фамилия.
+        /// Мессенджеры для контакта с пользователем (ПОТОМ ПРОДАДИМ! :3)
         /// </summary>
-        [Required]
-        public string Sername { get; private set; }
-
-        /// <summary>
-        /// Отчество.
-        /// </summary>
-        public string Fathername { get; private set; }
-        
-        public string Messangers { get; private set; }
+        public Messangers Messangers { get; private set; } = messangers;
 
         /// <summary>
         /// Роль пользователя в системе.
         /// </summary>
         [Required]
-        public Role Priveleges { get; private set; }
+        public Roles Priveleges { get; private set; } = priveleges;
 
-        public User(Guid id, string userName, string eMail, string phoneNumber, string password, string name, string sername, string fathername, string messangers, Role priveleges)
-        {
-            Id = id;
-            UserName = userName;
-            EMail = eMail;
-            PhoneNumber = phoneNumber;
-            Password = PasswordHasherService.HashPassword(password);
-            Name = name;
-            Sername = sername;
-            Fathername = fathername;
-            Messangers = messangers;
-            Priveleges = priveleges;
-        }
-
-        /// <summary>
-        /// Приватный конструктор для EF Core
-        /// </summary>
-        private User()
-        {
-            Name = string.Empty;
-            Password = string.Empty;
-            Name = string.Empty;
-            Sername = string.Empty;
-            Priveleges = Role.NONE;
-        }
-
-        
     }
 }

@@ -1,6 +1,10 @@
 ﻿using AIM.API.Data;
 using AIM.API.Models.Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using System.Threading;
 
 namespace AIM.API.Repositories
 {
@@ -9,13 +13,13 @@ namespace AIM.API.Repositories
         public async Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
             return await context.Users
-                .FirstOrDefaultAsync(co => co.Id == id, cancellationToken);
+                .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
         }
 
-        public async Task<User?> GetByUserNameAsync(string userName, CancellationToken cancellationToken = default)
+        public async Task<User?> GetByAnyLoginAsync(string login, CancellationToken cancellationToken = default)
         {
             return await context.Users
-                .FirstOrDefaultAsync(co => co.UserName == userName || co.EMail == userName || co.PhoneNumber == userName, cancellationToken);
+                .FirstOrDefaultAsync(u => u.LoginInfo.Contains(login), cancellationToken);
         }
 
         public async Task AddAsync(User user, CancellationToken cancellationToken = default)
@@ -29,16 +33,13 @@ namespace AIM.API.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            User? user = await context.Users
-                .FirstOrDefaultAsync(co => co.Id == id, cancellationToken);
-            if (user == null)
-                return false;
+            User? user = await GetByIdAsync(id, cancellationToken);
+            if (user is null)
+                return;
             context.Users.Remove(user);
-
             await context.SaveChangesAsync(cancellationToken);
-            return true;
         }
 
         public async Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default)
@@ -46,6 +47,5 @@ namespace AIM.API.Repositories
             return await context.Users.AnyAsync(co => co.Id == id, cancellationToken);
         }
 
-        // ADD VALIDATION
     }
 }

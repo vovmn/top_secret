@@ -1,6 +1,10 @@
 ﻿namespace AIM.API.Models
 {
-    public enum Role
+
+    /// <summary>
+    /// ЗАМЕНИТЬ НА IDENTITY
+    /// </summary>
+    public enum Roles
     {
         ADMIN = 0,
         CUSTOMER = 1,
