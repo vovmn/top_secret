@@ -1,11 +1,4 @@
-# services:
-#   com.api:
-#     image: ${DOCKER_REGISTRY-}comapi
-#     build:
-#       context: .
-#       dockerfile: COM.API/Dockerfile
-
-# version: '3.8'
+version: '3.8'
 
 services:
   db:
@@ -25,19 +18,32 @@ services:
       timeout: 5s
       retries: 5
 
+  migrator:
+    build:
+      context: .
+      dockerfile: COM.API/Dockerfile.migrator 
+    container_name: com_api_migrator
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ./COM.API/appsettings.json:/app/appsettings.json
+
   com.api:
-    image: ${DOCKER_REGISTRY-}comapi
+    image: comapi:latest
     build: 
       context: .          
       dockerfile: COM.API/Dockerfile 
     container_name: com_api_container
     ports:
-      - "8080:8080"
+      - "8081:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
-      db:
-        condition: service_healthy
+      migrator:
+        condition: service_completed_successfully 
     volumes:
       - ./COM.API/appsettings.json:/app/appsettings.json
 

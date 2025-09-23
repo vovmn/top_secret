@@ -31,5 +31,7 @@ namespace COM.API.Infrastructure.Data
             // Применяем конфигурации из папки Configurations
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
+
+
     }
 }

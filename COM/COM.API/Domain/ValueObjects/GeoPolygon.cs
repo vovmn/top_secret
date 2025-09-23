@@ -53,6 +53,44 @@ namespace COM.API.Domain.ValueObjects
                 yield return coord.Longitude;
             }
         }
+
+        // --- НОВЫЕ МЕТОДЫ ДЛЯ РАБОТЫ С WKT ---
+
+        /// <summary>
+        /// Преобразует полигон в строку формата WKT (Well-Known Text).
+        /// Пример: "POLYGON((30 10, 40 40, 20 40, 10 20, 30 10))"
+        /// </summary>
+        public string ToWkt()
+        {
+            var points = string.Join(", ", Coordinates.Select(c => $"{c.Longitude} {c.Latitude}"));
+            return $"POLYGON(({points}))";
+        }
+
+        /// <summary>
+        /// Создает экземпляр GeoPolygon из строки формата WKT.
+        /// </summary>
+        public static GeoPolygon FromWkt(string wkt)
+        {
+            if (string.IsNullOrWhiteSpace(wkt))
+                throw new ArgumentException("WKT строка не может быть пустой.", nameof(wkt));
+
+            // Упрощенный парсер для POLYGON((...))
+            // В реальном проекте лучше использовать NetTopologySuite.IO.WKTReader
+            var match = System.Text.RegularExpressions.Regex.Match(wkt.Trim(), @"POLYGON\s*\(\(([^)]+)\)\)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            if (!match.Success)
+                throw new ArgumentException("Неверный формат WKT полигона.", nameof(wkt));
+
+            var points = match.Groups[1].Value.Split(',')
+                .Select(p => p.Trim().Split(' '))
+                .Where(parts => parts.Length == 2)
+                .Select(parts => new Coordinate(
+                    double.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture), // Широта
+                    double.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture)  // Долгота
+                ))
+                .ToList();
+
+            return new GeoPolygon(points);
+        }
     }
 
     /// <summary>
@@ -62,44 +100,4 @@ namespace COM.API.Domain.ValueObjects
     /// <param name="Latitude">Широта (в градусах).</param>
     /// <param name="Longitude">Долгота (в градусах).</param>
     public record Coordinate(double Latitude, double Longitude);
-
-
-
-    // --- НОВЫЕ МЕТОДЫ ДЛЯ РАБОТЫ С WKT ---
-
-    /// <summary>
-    /// Преобразует полигон в строку формата WKT (Well-Known Text).
-    /// Пример: "POLYGON((30 10, 40 40, 20 40, 10 20, 30 10))"
-    /// </summary>
-    //public string ToWkt()
-    //{
-    //    var points = string.Join(", ", Coordinates.Select(c => $"{c.Longitude} {c.Latitude}"));
-    //    return $"POLYGON(({points}))";
-    //}
-
-    /// <summary>
-    /// Создает экземпляр GeoPolygon из строки формата WKT.
-    /// </summary>
-    //public static GeoPolygon FromWkt(string wkt)
-    //{
-    //    if (string.IsNullOrWhiteSpace(wkt))
-    //        throw new ArgumentException("WKT строка не может быть пустой.", nameof(wkt));
-
-    //    // Упрощенный парсер для POLYGON((...))
-    //    // В реальном проекте лучше использовать NetTopologySuite.IO.WKTReader
-    //    var match = System.Text.RegularExpressions.Regex.Match(wkt.Trim(), @"POLYGON\s*\(\(([^)]+)\)\)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-    //    if (!match.Success)
-    //        throw new ArgumentException("Неверный формат WKT полигона.", nameof(wkt));
-
-    //    var points = match.Groups[1].Value.Split(',')
-    //        .Select(p => p.Trim().Split(' '))
-    //        .Where(parts => parts.Length == 2)
-    //        .Select(parts => new Coordinate(
-    //            double.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture), // Широта
-    //            double.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture)  // Долгота
-    //        ))
-    //        .ToList();
-
-    //    return new GeoPolygon(points);
-    //}
 }

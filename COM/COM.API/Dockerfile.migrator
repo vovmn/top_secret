@@ -1,0 +1,15 @@
+﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
+WORKDIR /src
+
+COPY . .
+
+RUN dotnet restore "COM.API/COM.API.csproj"
+
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="${PATH}:/root/.dotnet/tools"
+
+WORKDIR /src/COM.API
+
+
+ENTRYPOINT ["sh", "-c", "dotnet ef database update --context ApplicationDbContext"]

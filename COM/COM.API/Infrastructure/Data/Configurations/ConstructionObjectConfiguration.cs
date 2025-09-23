@@ -1,4 +1,5 @@
 ﻿using COM.API.Domain.Entities;
+using COM.API.Infrastructure.Data.Converters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -27,8 +28,9 @@ namespace COM.API.Infrastructure.Data.Configurations
             // Для полигона мы будем хранить его как текст (GeoJSON или WKT) в PostgreSQL.
             // В продакшене лучше использовать тип geometry, но для упрощения демо — TEXT.
             builder.Property(co => co.Polygon)
-                   .HasColumnName("polygon_geojson")
-                   .HasColumnType("geometry(Polygon, 4326)") 
+                   .HasColumnName("polygon")
+                   .HasColumnType("geometry(Polygon, 4326)") // Тип PostGIS
+                   .HasConversion(new GeoPolygonConverter()) // Применяем конвертер
                    .IsRequired();
 
             // Индекс для быстрого поиска по статусу

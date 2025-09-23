@@ -1,4 +1,14 @@
+using COM.API.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// --- РЕГИСТРАЦИЯ СЕРВИСОВ (включая DbContext)  ---
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        o => o.UseNetTopologySuite() // <-- Это теперь будет работать
+    ));
 
 // Add services to the container.
 
