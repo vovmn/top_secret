@@ -19,8 +19,8 @@ declare module 'vue-router/auto-routes' {
    */
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
-    '/building-object/[id]': RouteRecordInfo<'/building-object/[id]', '/building-object/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
-    '/building-object/detail/violations': RouteRecordInfo<'/building-object/detail/violations', '/building-object/detail/violations', Record<never, never>, Record<never, never>>,
+    '/building-object/[id]/': RouteRecordInfo<'/building-object/[id]/', '/building-object/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/building-object/[id]/detail/violations': RouteRecordInfo<'/building-object/[id]/detail/violations', '/building-object/:id/detail/violations', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/options': RouteRecordInfo<'/options', '/options', Record<never, never>, Record<never, never>>,
   }
 
@@ -39,12 +39,12 @@ declare module 'vue-router/auto-routes' {
       routes: '/'
       views: never
     }
-    'src/pages/building-object/[id].vue': {
-      routes: '/building-object/[id]'
+    'src/pages/building-object/[id]/index.vue': {
+      routes: '/building-object/[id]/'
       views: never
     }
-    'src/pages/building-object/detail/violations.vue': {
-      routes: '/building-object/detail/violations'
+    'src/pages/building-object/[id]/detail/violations.vue': {
+      routes: '/building-object/[id]/detail/violations'
       views: never
     }
     'src/pages/options.vue': {

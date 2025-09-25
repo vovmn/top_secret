@@ -42,9 +42,10 @@
 </template>
 
 <script lang="ts" setup>
+import { useTheme } from 'vuetify';
+
 import HomeObjectCard from '@/components/features/home/HomeObjectCard.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
-import { useTheme } from 'vuetify';
 
 const theme = useTheme();
 const isDark = theme.current.value.dark;
