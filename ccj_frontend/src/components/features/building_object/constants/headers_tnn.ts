@@ -2,7 +2,7 @@ export const tnnGroupBy = [{ key: 'product', order: 'asc' }] as const;
 
 export const tnnHeaders = [
   { title: 'Товар', sortable: false, key: 'product', },
-  { title: '№ объекта', key: 'number', align: 'end' },
+  { title: '№', key: 'number', align: 'end' },
   { title: 'Объем', key: 'volume', align: 'end' },
   { title: 'Единица измерения', key: 'unit', align: 'end' },
   { title: 'Дата поступления', key: 'date', align: 'end' },

@@ -10,6 +10,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     BaseContainer: typeof import('./components/shared/BaseContainer.vue')['default']
     BuildingObjectContact: typeof import('./components/features/building_object/BuildingObjectContact.vue')['default']
+    BuildingObjectDahboardCard: typeof import('./components/features/building_object/BuildingObjectDahboardCard.vue')['default']
     HomeObjectCard: typeof import('./components/features/home/HomeObjectCard.vue')['default']
     HomeSearch: typeof import('./components/features/home/HomeSearch.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

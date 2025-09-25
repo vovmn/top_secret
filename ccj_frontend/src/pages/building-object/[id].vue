@@ -3,7 +3,7 @@
     <BaseContainer>
       <v-sheet class="mb-8 d-flex align-center ga-2" color="background">
         <h1 class="font-weight-bold">Объект #{{ id }}</h1>
-        <v-chip outline :color="statuses[status].color">{{ statuses[status].name }}</v-chip>
+        <v-chip outline :color="activeStatuses[status].color">{{ activeStatuses[status].name }}</v-chip>
       </v-sheet>
 
       <h2 class="mb-4 text-grey-lighten-1">Сетевой график</h2>
@@ -27,10 +27,36 @@
 
         <v-col cols="12" sm="12" md="7" lg="7">
           <h2 class="mb-4 text-grey-lighten-1">Товарно-транспортная накладная</h2>
-          <v-data-table :group-by="Сonstants.tnnGroupBy" :headers="Сonstants.tnnHeaders" :items="tnnData" :items-per-page="-1 "
-            item-value="product">
-            <template v-slot:group-summary="{ item, columns }"></template>
+          <v-data-table class="rounded-sm" :headers="Сonstants.tnnHeaders" :items="tnnData" :items-per-page="10"
+            item-value="product" hover>
+            <template v-slot:item.passport="{ value }">
+              <v-btn :to="value" variant="tonal" color="info" size="small">Ссылка</v-btn>
+            </template>
           </v-data-table>
+        </v-col>
+        <v-col cols="12" sm="12" md="4" lg="4">
+          <h2 class="mb-4 text-grey-lighten-1">Сводная панель</h2>
+          <v-card>
+            <v-card-text>
+              <v-row>
+                <v-col cols="12" sm="12" md="6" lg="6">
+                  <BuildingObjectDahboardCard
+                    :title="violationsLength > 0 ? `Нарушений: ${violationsLength}` : 'Нарушений нет'"
+                    :color="violationsLength > 0 ? 'warning' : 'info'"
+                    :container-class="violationsLength > 0 ? 'bg-warning d-flex flex-column' : 'bg-info d-flex flex-column'"
+                    :link="`/building-object/${id}/detail/violations`" />
+                </v-col>
+                <v-col cols="12" sm="12" md="6" lg="6">
+                  <BuildingObjectDahboardCard title="Сроки:" text="2 задачи заканчиваются завтра" color="info"
+                    :link="`/building-object/${id}/detail/schedule`" />
+                </v-col>
+                <v-col cols="12" sm="12" md="12" lg="12">
+                  <BuildingObjectDahboardCard title="Последняя проверка" text="03.04.2025 — требуется доработка"
+                    color="grey-darken-3" :link="`/building-object/${id}/detail/checklists`" />
+                </v-col>
+              </v-row>
+            </v-card-text>
+          </v-card>
         </v-col>
       </v-row>
     </BaseContainer>
@@ -41,7 +67,7 @@
 import { useTheme } from 'vuetify';
 
 import * as Сonstants from '@/components/features/building_object/constants/index';
-import { statuses, type StatusKey } from '@/components/shared/constants/statuses';
+import { activeStatuses, type StatusKey } from '@/components/shared/constants/statuses';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
 const theme = useTheme();
@@ -78,18 +104,20 @@ const contacts = [
 const status: StatusKey = 'active';
 
 const tnnData = [
-  { product: 'Бетон М300', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: 'Ссылка' },
-  { product: 'Бетон М301', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: 'Ссылка' },
-  { product: 'Бетон М302', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: 'Ссылка' },
-  { product: 'Бетон М303', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: 'Ссылка' },
-  { product: 'Бетон М304', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: 'Ссылка' },
-  { product: 'Бетон М305', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: 'Ссылка' },
-  { product: 'Бетон М306', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: 'Ссылка' },
-  { product: 'Бетон М307', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: 'Ссылка' },
-  { product: 'Бетон М308', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: 'Ссылка' },
+  { product: 'Бетон М300', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
+  { product: 'Бетон М301', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
+  { product: 'Бетон М302', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
+  { product: 'Бетон М303', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
+  { product: 'Бетон М304', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
+  { product: 'Бетон М305', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
+  { product: 'Бетон М306', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
+  { product: 'Бетон М307', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
+  { product: 'Бетон М308', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
+  { product: 'Бетон М309', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
+  { product: 'Бетон М310', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
+  { product: 'Бетон М311', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
+  { product: 'Бетон М312', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
 ];
+
+const violationsLength = 3;
 </script>
-
-<style scoped lang="sass">
-
-</style>
