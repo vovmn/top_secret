@@ -13,14 +13,13 @@
 </template>
 
 <script setup lang="ts">
-	defineProps<{
-		title: string
-		subtitle: string
-		src: string
-	}>();
+defineProps<{
+	title: string
+	subtitle: string
+	src: string
+}>();
 </script>
 
 <style scoped lang="sass">
 
 </style>
-
