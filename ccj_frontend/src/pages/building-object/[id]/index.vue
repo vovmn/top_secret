@@ -6,9 +6,9 @@
 				<v-chip outline :color="activeStatuses[status].color">{{ activeStatuses[status].name }}</v-chip>
 			</v-sheet>
 
-			<h2 class="mb-4 text-grey-lighten-1">Справка по объекту</h2>
 			<v-row justify="space-between">
 				<v-col cols="12" sm="12" md="7" lg="7">
+					<h2 class="mb-4 text-grey-lighten-1">Справка по объекту</h2>
 					<v-table striped="even" class="rounded-sm border">
 						<tbody>
 							<tr v-for="(row, key) in Сonstants.headersBuildingObject" :key="key">
@@ -16,7 +16,11 @@
 									{{ row.header }}
 								</td>
 								<td v-if="row.actions === 'link'">
-									<v-btn :to="`${route.path}/detail/${row.key}`" variant="text" size="small" color="info">{{ tableData[row.key] }}</v-btn>
+									<v-btn :to="`${route.path}/detail/${row.key}`" variant="text" size="small" color="info">{{
+										tableData[row.key] }}</v-btn>
+								</td>
+								<td v-else-if="row.key === 'status'" class="pl-7">
+									{{ activeStatuses[status].name }}
 								</td>
 								<td v-else class="pl-7">
 									{{ tableData[row.key] }}
@@ -24,20 +28,6 @@
 							</tr>
 						</tbody>
 					</v-table>
-				</v-col>
-				<v-col cols="12" sm="12" md="4" lg="4">
-					<BuildingObjectContact class="mb-8" v-for="contact in contacts" :title="contact.title"
-						:subtitle="contact.subtitle" :src="contact.src" />
-				</v-col>
-
-				<v-col cols="12" sm="12" md="7" lg="7">
-					<h2 class="mb-4 text-grey-lighten-1">Товарно-транспортная накладная</h2>
-					<v-data-table class="rounded-sm" :headers="Сonstants.headersTnn" :items="tnnData" :items-per-page="10"
-						item-value="product" hover>
-						<template v-slot:item.passport="{ value }">
-							<v-btn :to="value" variant="tonal" color="info" size="small">Открыть</v-btn>
-						</template>
-					</v-data-table>
 				</v-col>
 				<v-col cols="12" sm="12" md="4" lg="4">
 					<h2 class="mb-4 text-grey-lighten-1">Сводная панель</h2>
@@ -62,6 +52,20 @@
 							</v-row>
 						</v-card-text>
 					</v-card>
+				</v-col>
+
+				<v-col cols="12" sm="12" md="7" lg="7">
+					<h2 class="mb-4 text-grey-lighten-1">Товарно-транспортная накладная</h2>
+					<v-data-table class="rounded-sm" :headers="Сonstants.headersTnn" :items="tnnData" :items-per-page="10"
+						item-value="product" hover>
+						<template v-slot:item.passport="{ value }">
+							<v-btn :to="value" variant="tonal" color="info" size="small">Открыть</v-btn>
+						</template>
+					</v-data-table>
+				</v-col>
+				<v-col cols="12" sm="12" md="4" lg="4" class="mt-13">
+					<BuildingObjectContact class="mb-8" v-for="contact in contacts" :title="contact.title"
+						:subtitle="contact.subtitle" :src="contact.src" />
 				</v-col>
 			</v-row>
 		</BaseContainer>
