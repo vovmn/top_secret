@@ -1,6 +1,6 @@
 export const tnnGroupBy = [{ key: 'product', order: 'asc' }] as const;
 
-export const tnnHeaders = [
+export const headersTnn = [
   { title: 'Товар', sortable: false, key: 'product', },
   { title: '№', key: 'number', align: 'end' },
   { title: 'Объем', key: 'volume', align: 'end' },

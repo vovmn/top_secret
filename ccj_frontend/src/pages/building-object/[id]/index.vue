@@ -6,16 +6,21 @@
 				<v-chip outline :color="activeStatuses[status].color">{{ activeStatuses[status].name }}</v-chip>
 			</v-sheet>
 
-			<h2 class="mb-4 text-grey-lighten-1">Сетевой график</h2>
+			<h2 class="mb-4 text-grey-lighten-1">Справка по объекту</h2>
 			<v-row justify="space-between">
 				<v-col cols="12" sm="12" md="7" lg="7">
-					<v-table striped="even" density="compact" class="rounded-sm border">
+					<v-table striped="even" class="rounded-sm border">
 						<tbody>
-							<tr v-for="(row, key) in Сonstants.headersAndKeysNetworkSheet" :key="key">
+							<tr v-for="(row, key) in Сonstants.headersBuildingObject" :key="key">
 								<td :style="`background-color: ${colors.secondary}`" class="text-white">
 									{{ row.header }}
 								</td>
-								<td>{{ tableData[row.key] }}</td>
+								<td v-if="row.actions === 'link'">
+									<v-btn :to="`${route.path}/detail/${row.key}`" variant="text" size="small" color="info">{{ tableData[row.key] }}</v-btn>
+								</td>
+								<td v-else class="pl-7">
+									{{ tableData[row.key] }}
+								</td>
 							</tr>
 						</tbody>
 					</v-table>
@@ -27,10 +32,10 @@
 
 				<v-col cols="12" sm="12" md="7" lg="7">
 					<h2 class="mb-4 text-grey-lighten-1">Товарно-транспортная накладная</h2>
-					<v-data-table class="rounded-sm" :headers="Сonstants.tnnHeaders" :items="tnnData" :items-per-page="10"
+					<v-data-table class="rounded-sm" :headers="Сonstants.headersTnn" :items="tnnData" :items-per-page="10"
 						item-value="product" hover>
 						<template v-slot:item.passport="{ value }">
-							<v-btn :to="value" variant="tonal" color="info" size="small">Ссылка</v-btn>
+							<v-btn :to="value" variant="tonal" color="info" size="small">Открыть</v-btn>
 						</template>
 					</v-data-table>
 				</v-col>
@@ -69,6 +74,7 @@ import { useTheme } from 'vuetify';
 import * as Сonstants from '@/components/features/building_object/constants/index';
 import { activeStatuses, type StatusKey } from '@/components/shared/constants/statuses';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
+import { VBtn } from 'vuetify/components';
 
 const theme = useTheme();
 const themeColors = theme.current.value.colors;
@@ -77,15 +83,16 @@ const colors = computed(() => themeColors);
 const route = useRoute('/building-object/[id]/');
 const id = route.params.id;
 
+const status: StatusKey = 'active';
+
 const tableData = {
-	objectNumber: '001',
-	task: 'Устройство фундамента',
-	fullTask: 'Устройство монолитного ленточного фундамента с армированием',
-	address: 'ул. Ленина, 15',
-	startDate: '2025-04-01',
-	kpgz: '01.23.45.67',
-	volume: '45.5',
-	unit: 'м³'
+	name: 'Устройство фундамента',
+	status: status,
+	poligon: 'Полигон',
+	schedule: 'Перейти',
+	violations: 'Перейти',
+	chackListHistory: 'Перейти',
+	materials: 'Перейти',
 }
 
 const contacts = [
@@ -100,8 +107,6 @@ const contacts = [
 		src: "https://cdn.vuetifyjs.com/images/john.png"
 	},
 ] satisfies { title: string, subtitle: string, src: string }[];
-
-const status: StatusKey = 'active';
 
 const tnnData = [
 	{ product: 'Бетон М300', number: '1', volume: 45.5, unit: 'м³', date: '2025-04-01', passport: '/' },
