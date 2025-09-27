@@ -20,9 +20,8 @@ namespace COM.API.Infrastructure.Data.Configurations
             builder.Property(c => c.Type).HasColumnName("type").IsRequired();
             builder.Property(c => c.CreatedAt).HasColumnName("created_at").IsRequired();
             builder.Property(c => c.FileId).HasColumnName("file_id").HasMaxLength(1000);
-            builder.Property(c => c.Content).HasColumnName("content").HasColumnType("JSONB"); // PostgreSQL JSONB тип
+            builder.Property(c => c.Content).HasColumnName("content").HasColumnType("JSONB");
 
-            // Внешний ключ к ConstructionObject
             builder.HasOne<ConstructionObject>()
                    .WithMany(co => co.Checklists)
                    .HasForeignKey(c => c.ConstructionObjectId)

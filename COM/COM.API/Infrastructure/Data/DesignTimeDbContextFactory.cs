@@ -11,20 +11,23 @@ namespace COM.API.Infrastructure.Data
     {
         public ApplicationDbContext CreateDbContext(string[] args)
         {
-            // Создаем построитель конфигурации для чтения appsettings.json
+            var basePath = Directory.GetCurrentDirectory();
+
             var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
+                .SetBasePath(basePath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.Development.json", optional: true)
                 .Build();
 
-            // Получаем строку подключения из конфигурации
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = configuration.GetConnectionString("DefaultConnection")
+                ?? throw new InvalidOperationException("Строка подключения 'DefaultConnection' не найдена в appsettings.json.");
 
-            // Настраиваем опции для DbContext
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseNpgsql(connectionString); // Используем PostgreSQL
+            optionsBuilder.UseNpgsql(connectionString, npgsqlOptions =>
+            {
+                npgsqlOptions.UseNetTopologySuite(); 
+            });
 
-            // Возвращаем сконфигурированный контекст
             return new ApplicationDbContext(optionsBuilder.Options);
         }
     }

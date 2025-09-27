@@ -1,4 +1,5 @@
-﻿using COM.API.Application.Interfaces;
+﻿using AutoMapper;
+using COM.API.Application.Interfaces;
 using COM.API.Domain.Entities;
 using COM.API.Domain.Enums;
 using COM.API.Domain.Events;
@@ -6,6 +7,7 @@ using COM.API.Domain.ValueObjects;
 using COM.API.DTOs.Requests;
 using COM.API.DTOs.Responses;
 using COM.API.Infrastructure.Interfaces;
+using COM.API.Profiles;
 
 namespace COM.API.Application.Services
 {
@@ -14,15 +16,17 @@ namespace COM.API.Application.Services
     /// Реализует бизнес-логику создания, активации и завершения объектов.
     /// </summary>
     public class ObjectService(
-        IObjectRepository objectRepository,
-        IChecklistService checklistService,
+        IUnitOfWork unitOfWork,
+        IFileStorageClient fileStorageClient,
         IGeospatialService geospatialService,
-        IDomainEventPublisher eventPublisher) : IObjectService
+        IDomainEventPublisher eventPublisher,
+        IMapper mapper) : IObjectService
     {
-        private readonly IObjectRepository _objectRepository = objectRepository;
-        private readonly IChecklistService _checklistService = checklistService;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork; // Единая точка входа для всех репозиториев
+        private readonly IFileStorageClient _fileStorageClient = fileStorageClient;
         private readonly IGeospatialService _geospatialService = geospatialService;
         private readonly IDomainEventPublisher _eventPublisher = eventPublisher;
+        private readonly IMapper _mapper = mapper;
 
         /// <summary>
         /// Создает новый объект благоустройства.
@@ -39,18 +43,13 @@ namespace COM.API.Application.Services
                 request.StartDate,
                 request.EndDate);
 
-            await _objectRepository.AddAsync(constructionObject, cancellationToken);
+            // 1. Регистрируем объект для добавления
+            await _unitOfWork.Objects.AddAsync(constructionObject, cancellationToken);
 
-            return new ObjectResponse
-            {
-                Id = constructionObject.Id,
-                Name = constructionObject.Name,
-                Address = constructionObject.Address,
-                Status = constructionObject.Status,
-                StartDate = constructionObject.StartDate,
-                EndDate = constructionObject.EndDate,
-                Polygon = [.. constructionObject.Polygon.Coordinates]
-            };
+            // 2. ЯВНО сохраняем ВСЕ изменения одной транзакцией
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            return _mapper.Map<ObjectResponse>(constructionObject);
         }
 
         /// <summary>
@@ -60,47 +59,47 @@ namespace COM.API.Application.Services
         /// </summary>
         public async Task<ActivationResponse> ActivateObjectAsync(ActivateObjectRequest request, CancellationToken cancellationToken = default)
         {
-            var constructionObject = await _objectRepository.GetByIdAsync(request.ObjectId, cancellationToken)
-                ?? throw new KeyNotFoundException($"Объект с ID {request.ObjectId} не найден.");
+            var obj = await _unitOfWork.Objects.GetByIdAsync(request.ObjectId, cancellationToken)
+               ?? throw new KeyNotFoundException($"Объект с ID {request.ObjectId} не найден.");
 
-            // Проверяем, что пользователь, активирующий объект, находится на его территории (ТЗ п.3)
+            // Early validation
+            if (obj.Status != ObjectStatus.Planned)
+                throw new InvalidOperationException("Активация возможна только для объектов в статусе 'Planned'.");
+
+            // Геопроверка
             var userLocation = new Coordinate(request.UserLatitude, request.UserLongitude);
-            if (!_geospatialService.IsPointInPolygon(userLocation, constructionObject.Polygon.Coordinates))
-            {
+            if (!_geospatialService.IsPointInPolygon(userLocation, obj.Polygon.Coordinates))
                 throw new InvalidOperationException("Активация объекта возможна только при физическом присутствии на его территории.");
+
+            // Загрузка акта открытия
+            string? fileId = null;
+            if (request.ActFile != null)
+            {
+                fileId = await _fileStorageClient.UploadFileAsync(request.ActFile, request.ActFileName, cancellationToken);
             }
 
-            // Загружаем чек-лист акта открытия
-            var checklistResponse = await _checklistService.UploadChecklistAsync(
-                new UploadChecklistRequest
-                {
-                    ConstructionObjectId = request.ObjectId,
-                    File = request.ActFile,
-                    FileName = request.ActFileName,
-                    Type = ChecklistType.ActOpening,
-                    Content = request.ChecklistAnswers // JSON-строка с ответами
-                }, cancellationToken);
-
+            // Создание чек-листа акта открытия
             var checklist = new Checklist(
-                Guid.Parse(checklistResponse.Id),
-                request.ObjectId,
-                ChecklistType.ActOpening,
-                checklistResponse.FileId,
-                request.ChecklistAnswers);
+                id: Guid.NewGuid(),
+                constructionObjectId: request.ObjectId,
+                type: ChecklistType.ActOpening,
+                fileId: fileId,
+                content: request.ChecklistAnswers);
 
-            // Выполняем активацию через доменный метод
-            constructionObject.Activate(
+            // Активация через домен
+            obj.Activate(
                 request.ForemanUserId,
                 request.InspectorSKUserId,
                 request.InspectorKOUserId,
                 checklist);
 
-            // Сохраняем изменения
-            await _objectRepository.UpdateAsync(constructionObject, cancellationToken);
+            // Сохранение ВСЕГО в одной транзакции
+            await _unitOfWork.Checklists.AddAsync(checklist, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            // Публикуем доменное событие
+            // Публикация события
             await _eventPublisher.PublishAsync(new ObjectActivatedEvent(
-                constructionObject.Id,
+                obj.Id,
                 DateTime.UtcNow,
                 request.ForemanUserId,
                 request.InspectorSKUserId,
@@ -110,7 +109,7 @@ namespace COM.API.Application.Services
             {
                 Success = true,
                 Message = "Объект успешно активирован.",
-                ActivatedObjectId = constructionObject.Id,
+                ActivatedObjectId = obj.Id,
                 ChecklistId = checklist.Id
             };
         }
@@ -120,31 +119,10 @@ namespace COM.API.Application.Services
         /// </summary>
         public async Task<ObjectResponse> GetObjectByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            var constructionObject = await _objectRepository.GetByIdAsync(id, cancellationToken)
-                ?? throw new KeyNotFoundException($"Объект с ID {id} не найден.");
+            var obj = await _unitOfWork.Objects.GetByIdAsync(id, cancellationToken)
+                 ?? throw new KeyNotFoundException($"Объект с ID {id} не найден.");
 
-            return new ObjectResponse
-            {
-                Id = constructionObject.Id,
-                Name = constructionObject.Name,
-                Address = constructionObject.Address,
-                Status = constructionObject.Status,
-                StartDate = constructionObject.StartDate,
-                EndDate = constructionObject.EndDate,
-                Polygon = constructionObject.Polygon.Coordinates.ToList(),
-                Responsibles = constructionObject.Responsibles.Select(r => new ResponsibleDto
-                {
-                    UserId = r.UserId,
-                    Role = r.Role
-                }).ToList(),
-                Checklists = constructionObject.Checklists.Select(c => new ChecklistDto
-                {
-                    Id = c.Id.ToString(),
-                    Type = c.Type,
-                    CreatedAt = c.CreatedAt,
-                    FileId = c.FileId
-                }).ToList()
-            };
+            return _mapper.Map<ObjectResponse>(obj);
         }
 
         /// <summary>
@@ -152,11 +130,14 @@ namespace COM.API.Application.Services
         /// </summary>
         public async Task CompleteObjectAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            var constructionObject = await _objectRepository.GetByIdAsync(id, cancellationToken)
+            var obj = await _unitOfWork.Objects.GetByIdAsync(id, cancellationToken)
                 ?? throw new KeyNotFoundException($"Объект с ID {id} не найден.");
 
-            constructionObject.Complete();
-            await _objectRepository.UpdateAsync(constructionObject, cancellationToken);
+            if (obj.Status != ObjectStatus.Active)
+                throw new InvalidOperationException("Завершить можно только активный объект.");
+
+            obj.Complete();
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

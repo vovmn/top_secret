@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -29,9 +30,6 @@
     <Folder Include="DTOs\Responses\" />
     <Folder Include="Infrastructure\Data\Configurations\" />
     <Folder Include="Infrastructure\Data\Converters\" />
-    <Folder Include="Infrastructure\Integration\" />
-    <Folder Include="Profiles\" />
-    <Folder Include="Extensions\" />
   </ItemGroup>
 
 </Project>

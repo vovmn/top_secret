@@ -25,16 +25,21 @@ namespace COM.API.Infrastructure.Data.Configurations
             builder.Property(co => co.StartDate).HasColumnName("start_date");
             builder.Property(co => co.EndDate).HasColumnName("end_date");
 
-            // Для полигона мы будем хранить его как текст (GeoJSON или WKT) в PostgreSQL.
-            // В продакшене лучше использовать тип geometry, но для упрощения демо — TEXT.
+            // Храним полигон как TEXT (WKT), а не geometry
             builder.Property(co => co.Polygon)
                    .HasColumnName("polygon")
-                   .HasColumnType("geometry(Polygon, 4326)") // Тип PostGIS
-                   .HasConversion(new GeoPolygonConverter()) // Применяем конвертер
+                   .HasColumnType("TEXT")
+                   .HasConversion(new GeoPolygonConverter())
                    .IsRequired();
 
-            // Индекс для быстрого поиска по статусу
             builder.HasIndex(co => co.Status);
+
+            // Настройка доступа к приватным коллекциям через backing fields
+            var responsiblesNav = builder.Metadata.FindNavigation(nameof(ConstructionObject.Responsibles));
+            responsiblesNav?.SetPropertyAccessMode(PropertyAccessMode.Field);
+
+            var checklistsNav = builder.Metadata.FindNavigation(nameof(ConstructionObject.Checklists));
+            checklistsNav?.SetPropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }

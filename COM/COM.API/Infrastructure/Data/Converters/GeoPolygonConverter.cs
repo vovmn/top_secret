@@ -10,8 +10,8 @@ namespace COM.API.Infrastructure.Data.Converters
     public class GeoPolygonConverter : ValueConverter<GeoPolygon, string>
     {
         public GeoPolygonConverter() : base(
-        polygon => polygon.ToWkt(),           // GeoPolygon -> string (при сохранении в БД)
-        wkt => GeoPolygon.FromWkt(wkt)        // string -> GeoPolygon (при загрузке из БД)
+            polygon => polygon.ToWkt(),
+            wkt => GeoPolygon.FromWkt(wkt)
         )
         {
         }
