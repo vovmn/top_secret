@@ -4,6 +4,6 @@ export const headersBuildingObject = [
 	{ header: 'Полигон', key: 'poligon', actions: 'none'},
 	{ header: 'Сетевой график', key: 'schedule', actions: 'link'},
 	{ header: 'Журнал нарушений', key: 'violations', actions: 'link'},
-	{ header: 'История чек листов', key: 'chackListHistory', actions: 'link'},
+	{ header: 'История чек листов', key: 'checkListHistory', actions: 'link'},
 	{ header: 'Материалы', key: 'materials', actions: 'link'},
 ] as const;

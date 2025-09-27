@@ -1,11 +1,11 @@
 <template>
 	<DefaultLayout>
 		<BaseContainer>
-			<h1 class="mb-8 font-weight-bold">Сроки</h1>
+			<h1 class="mb-8 font-weight-bold">График</h1>
 			<h2 class="mb-4 text-grey-lighten-1">Сетевой график</h2>
 			<v-row justify="space-between">
 				<v-col cols="12" sm="12" md="7" lg="7">
-					<v-table striped="even" density="compact" class="rounded-sm border">
+					<v-table striped="even" class="rounded-sm border">
 						<tbody>
 							<tr v-for="(row, key) in Сonstants.headersAndKeysNetworkSheet" :key="key">
 								<td :style="`background-color: ${colors.secondary}`" class="text-white">
@@ -22,8 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import * as Сonstants from '@/components/features/building_object/constants/index';
+import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import { useTheme } from 'vuetify';
 
 const theme = useTheme();

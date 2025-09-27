@@ -20,6 +20,7 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/building-object/[id]/': RouteRecordInfo<'/building-object/[id]/', '/building-object/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/building-object/[id]/detail/checklist': RouteRecordInfo<'/building-object/[id]/detail/checklist', '/building-object/:id/detail/checklist', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/building-object/[id]/detail/schedule': RouteRecordInfo<'/building-object/[id]/detail/schedule', '/building-object/:id/detail/schedule', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/building-object/[id]/detail/violations': RouteRecordInfo<'/building-object/[id]/detail/violations', '/building-object/:id/detail/violations', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/options': RouteRecordInfo<'/options', '/options', Record<never, never>, Record<never, never>>,
@@ -42,6 +43,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/building-object/[id]/index.vue': {
       routes: '/building-object/[id]/'
+      views: never
+    }
+    'src/pages/building-object/[id]/detail/checklist.vue': {
+      routes: '/building-object/[id]/detail/checklist'
       views: never
     }
     'src/pages/building-object/[id]/detail/schedule.vue': {

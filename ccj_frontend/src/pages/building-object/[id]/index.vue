@@ -42,12 +42,12 @@
 										:link="`/building-object/${id}/detail/violations`" />
 								</v-col>
 								<v-col cols="12" sm="12" md="6" lg="6">
-									<BuildingObjectDahboardCard title="Сроки:" text="2 задачи заканчиваются завтра" color="info"
+									<BuildingObjectDahboardCard title="График" text="2 задачи заканчиваются завтра" color="info"
 										:link="`/building-object/${id}/detail/schedule`" />
 								</v-col>
 								<v-col cols="12" sm="12" md="12" lg="12">
-									<BuildingObjectDahboardCard title="Последняя проверка" text="03.04.2025 — требуется доработка"
-										color="grey-darken-3" :link="`/building-object/${id}/detail/checklists`" />
+									<BuildingObjectDahboardCard title="Статус работы" text="03.04.2025 — требуется доработка"
+										color="grey-darken-3" :link="`/building-object/${id}/detail/checklist`" />
 								</v-col>
 							</v-row>
 						</v-card-text>
@@ -78,7 +78,6 @@ import { useTheme } from 'vuetify';
 import * as Сonstants from '@/components/features/building_object/constants/index';
 import { activeStatuses, type StatusKey } from '@/components/shared/constants/statuses';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
-import { VBtn } from 'vuetify/components';
 
 const theme = useTheme();
 const themeColors = theme.current.value.colors;
@@ -95,7 +94,7 @@ const tableData = {
 	poligon: 'Полигон',
 	schedule: 'Перейти',
 	violations: 'Перейти',
-	chackListHistory: 'Перейти',
+	checkListHistory: 'Перейти',
 	materials: 'Перейти',
 }
 
