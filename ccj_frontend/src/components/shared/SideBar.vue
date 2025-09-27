@@ -22,9 +22,8 @@
 import { useTheme } from 'vuetify';
 
 const theme = useTheme();
-const isDark = theme.current.value.dark;
-const primaryColorWhenDarkTheme = computed(() => isDark ? 'background' : 'primary');
-const surfaceToAccentWhenDarkTheme = computed(() => isDark ? 'accent' : 'surface');
+const primaryColorWhenDarkTheme = computed(() => theme.current.value.dark ? 'background' : 'primary');
+const surfaceToAccentWhenDarkTheme = computed(() => theme.current.value.dark ? 'accent' : 'surface');
 </script>
 
 <style scoped lang="sass">

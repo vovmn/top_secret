@@ -14,7 +14,7 @@ const theme = useTheme();
 onMounted(() => {
     const savedTheme = localStorage.getItem('app-theme') as 'light' | 'dark' | null
     if (savedTheme) {
-      theme.global.name.value = savedTheme
+      theme.change(savedTheme); 
     }
 })
 </script>

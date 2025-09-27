@@ -80,8 +80,7 @@ import { activeStatuses, type StatusKey } from '@/components/shared/constants/st
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
 const theme = useTheme();
-const themeColors = theme.current.value.colors;
-const colors = computed(() => themeColors);
+const colors = computed(() => theme.current.value.colors);
 
 const route = useRoute('/building-object/[id]/');
 const id = route.params.id;

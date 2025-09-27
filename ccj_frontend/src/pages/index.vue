@@ -11,13 +11,13 @@
           <v-col cols="6">
             <v-tabs v-model="tab" align-tabs="center" :color="primaryToAccentWhenDarkTheme"
               :slider-color="primaryToAccentWhenDarkTheme" window>
-              <v-tab class="mr-4" :value="1">
+              <v-tab class="rounded-sm mr-4" :value="1">
                 Активирован
               </v-tab>
-              <v-tab class="mr-4" :value="2">
+              <v-tab class="rounded-sm mr-4" :value="2">
                 На контроле
               </v-tab>
-              <v-tab class="" :value="3">
+              <v-tab class="rounded-sm " :value="3">
                 Завершен
               </v-tab>
             </v-tabs>
@@ -48,8 +48,7 @@ import HomeObjectCard from '@/components/features/home/HomeObjectCard.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
 const theme = useTheme();
-const isDark = theme.current.value.dark;
-const primaryToAccentWhenDarkTheme = computed(() => isDark ? 'accent' : 'primary');
+const primaryToAccentWhenDarkTheme = computed(() => theme.current.value.dark ? 'accent' : 'primary');
 
 const tab = ref(1);
 const search = ref('');

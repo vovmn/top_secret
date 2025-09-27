@@ -28,8 +28,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import { useTheme } from 'vuetify';
 
 const theme = useTheme();
-const themeColors = theme.current.value.colors;
-const colors = computed(() => themeColors);
+const colors = computed(() => theme.current.value.colors);
 
 const tableData = {
 	objectNumber: '001',
