@@ -16,6 +16,7 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify'
 // Styles
 import 'unfonts.css'
+import '@/../node_modules/frappe-gantt/dist/frappe-gantt.css'
 
 const app = createApp(App)
 

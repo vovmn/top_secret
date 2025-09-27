@@ -24,6 +24,7 @@
 <script setup lang="ts">
 import * as Сonstants from '@/components/features/building_object/constants/index';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
+
 import { useTheme } from 'vuetify';
 
 const theme = useTheme();
