@@ -1,5 +1,6 @@
-﻿using AIM.API.Models;
-using AIM.API.Services;
+﻿using AIM.Application.DTOs.Responses;
+using AIM.Application.DTOs.Requests;
+using AIM.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,27 +10,50 @@ namespace AIM.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class AccountController(JwtTokenService jwtTokenService) : ControllerBase
+    public class AccountController(AuthService authService) : ControllerBase
     {
+        // POST api/register
+        [HttpPost("Register")]
+        [AllowAnonymous]
+        public async Task<ActionResult<LoginResponseDto>> Register([FromBody] RegisterRequestDto request)
+        {
+            try
+            {
+                return await authService.RegisterUser(request);
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+        }
+
         // POST api/Login
         [HttpPost("Login")]
         [AllowAnonymous]
         public async Task<ActionResult<LoginResponseDto>> Login([FromBody] LoginRequestDto request)
         {
-            LoginResponseDto? result = await jwtTokenService.Authenticate(request);
-            return result is null ? Unauthorized() : result;
+            try
+            {
+                return await authService.Authenticate(request);
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized(ex.Message);
+            }
         }
-
+        
         // POST api/RefreshToken
         [HttpPost("RefreshToken")]
-        [AllowAnonymous]
         public async Task<ActionResult<LoginResponseDto>> RefreshToken([FromBody] RefreshTokenRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request.Token))
-                return BadRequest("Invalid Token");
-
-            LoginResponseDto? result = await jwtTokenService.ValidateRefreshToken(request.Token);
-            return result is null ? Unauthorized() : result;
+            try
+            {
+                return await authService.RefreshToken(request);
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized(ex.Message);
+            }
         }
     }
 }
