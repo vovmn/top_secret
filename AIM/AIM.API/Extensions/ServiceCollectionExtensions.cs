@@ -24,7 +24,7 @@ namespace AIM.API.Extensions
             // 1. DbContext
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
-                    npgOptions => npgOptions.EnableRetryOnFailure()));
+        b => b.MigrationsAssembly("AIM.Infrastructure")));
 
             // 2. Репозитории
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();

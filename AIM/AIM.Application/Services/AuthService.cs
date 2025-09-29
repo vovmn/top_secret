@@ -3,6 +3,7 @@ using AIM.Application.DTOs.Responses;
 using AIM.Application.Interfaces;
 using AIM.Domain.Entities;
 using AIM.Domain.Enums;
+using AIM.Infrastructure.Data.Interfaces;
 using AIM.Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +22,7 @@ namespace AIM.Application.Services
     /// <summary>
     /// Аутентификация, авторизация и генерация JWT
     /// </summary>
-    public class AuthService(UserRepository userRepository, RefreshTokenRepository refreshTokenRepository, IConfiguration configuration) : IAuthService
+    public class AuthService(IUserRepository userRepository, IRefreshTokenRepository refreshTokenRepository, IConfiguration configuration) : IAuthService
     {
         /// <summary>
         /// Регистрация пользователя
