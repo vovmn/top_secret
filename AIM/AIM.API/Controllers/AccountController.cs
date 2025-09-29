@@ -3,6 +3,7 @@ using AIM.Application.DTOs.Requests;
 using AIM.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using AIM.Application.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,7 +11,7 @@ namespace AIM.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class AccountController(AuthService authService) : ControllerBase
+    public class AccountController(IAuthService authService) : ControllerBase
     {
         // POST api/register
         [HttpPost("Register")]

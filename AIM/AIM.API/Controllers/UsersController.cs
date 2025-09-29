@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using AIM.Infrastructure.Data;
 using AIM.Application.Services;
 using AIM.Domain.Entities;
+using AIM.Application.Interfaces;
 
 namespace AIM.API.Controllers
 {
@@ -18,7 +19,7 @@ namespace AIM.API.Controllers
     [ApiController]
     [Authorize]
     //// ADD ROLES
-    public class UsersController(UserService userService) : ControllerBase
+    public class UsersController(IUserService userService) : ControllerBase
     {
         // GET: /Users
         [HttpGet]

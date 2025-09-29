@@ -89,7 +89,9 @@ namespace AIM.Domain.ValueObjects
 
         private static string? OtherValidator(string? value)
         {
-            if (string.IsNullOrWhiteSpace(value) || value.Length > 100)
+            if (string.IsNullOrWhiteSpace(value))
+                return null;
+            if (value.Length > 100)
                 throw new ArgumentException("Название мессенджера должно быть от 1 до 100 символов");
 
             return value.Trim();
