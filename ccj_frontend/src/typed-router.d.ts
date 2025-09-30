@@ -19,6 +19,9 @@ declare module 'vue-router/auto-routes' {
    */
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
+    '/auth/': RouteRecordInfo<'/auth/', '/auth', Record<never, never>, Record<never, never>>,
+    '/auth/login': RouteRecordInfo<'/auth/login', '/auth/login', Record<never, never>, Record<never, never>>,
+    '/auth/sign-in': RouteRecordInfo<'/auth/sign-in', '/auth/sign-in', Record<never, never>, Record<never, never>>,
     '/building-object/[id]/': RouteRecordInfo<'/building-object/[id]/', '/building-object/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/building-object/[id]/detail/checklist': RouteRecordInfo<'/building-object/[id]/detail/checklist', '/building-object/:id/detail/checklist', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/building-object/[id]/detail/schedule': RouteRecordInfo<'/building-object/[id]/detail/schedule', '/building-object/:id/detail/schedule', { id: ParamValue<true> }, { id: ParamValue<false> }>,
@@ -39,6 +42,18 @@ declare module 'vue-router/auto-routes' {
   export interface _RouteFileInfoMap {
     'src/pages/index.vue': {
       routes: '/'
+      views: never
+    }
+    'src/pages/auth/index.vue': {
+      routes: '/auth/'
+      views: never
+    }
+    'src/pages/auth/login.vue': {
+      routes: '/auth/login'
+      views: never
+    }
+    'src/pages/auth/sign-in.vue': {
+      routes: '/auth/sign-in'
       views: never
     }
     'src/pages/building-object/[id]/index.vue': {

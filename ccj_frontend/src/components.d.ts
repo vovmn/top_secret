@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AuthSelectTypeCard: typeof import('./components/features/auth/AuthSelectTypeCard.vue')['default']
     BaseContainer: typeof import('./components/shared/BaseContainer.vue')['default']
     BuildingObjectContact: typeof import('./components/features/building_object/BuildingObjectContact.vue')['default']
     BuildingObjectDahboardCard: typeof import('./components/features/building_object/BuildingObjectDahboardCard.vue')['default']
