@@ -112,10 +112,23 @@
   import { phoneMask } from '@/components/features/auth/constants/auth_phone_mask'
   import AuthLayout from '@/layouts/AuthLayout.vue'
   import { useAuthStore } from '@/stores/auth'
+  import { useRoleStore } from '@/stores/role'
 
   const router = useRouter()
 
+  const roleStore = useRoleStore()
   const authStore = useAuthStore()
+
+  const selectedRole = ref<string | null>(null)
+
+  onMounted(() => {
+    if (roleStore.selectedRole) {
+      selectedRole.value = roleStore.selectedRole
+      console.log('Ваша роль:', selectedRole.value)
+    } else {
+      router.push('/auth')
+    }
+  })
 
   const formData = ref<SignupForm>({
     name: '',
@@ -126,6 +139,7 @@
     phoneNumber: '+7 ',
     password1: '',
     password2: '',
+    role: selectedRole.value!,
   })
 
   const show = ref(false)

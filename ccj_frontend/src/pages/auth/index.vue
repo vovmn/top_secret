@@ -18,7 +18,7 @@
         md="4"
         sm="12"
       >
-        <AuthSelectTypeCard :src="card.src" :title="card.title" :to="card.to" />
+        <AuthSelectTypeCard :src="card.src" :title="card.title" @click="selectRole(card.slug)" />
       </v-col>
     </v-row>
   </AuthLayout>
@@ -27,6 +27,15 @@
 <script setup lang="ts">
   import { authTypeCards } from '@/components/features/auth/constants/'
   import AuthLayout from '@/layouts/AuthLayout.vue'
+  import { useRoleStore } from '@/stores/role'
+
+  const roleStore = useRoleStore()
+  const router = useRouter()
+
+  function selectRole (role: string) {
+    roleStore.setRole(role)
+    router.push('/auth/sign-up')
+  }
 </script>
 
 <style scoped lang="sass">

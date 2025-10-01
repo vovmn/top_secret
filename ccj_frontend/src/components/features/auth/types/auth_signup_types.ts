@@ -7,4 +7,5 @@ export interface SignupForm {
   phoneNumber: string
   password1: string
   password2: string
+  role: string
 }

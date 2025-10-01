@@ -6,7 +6,7 @@
         v-bind="props"
         :color="isHovering ? 'info' : 'primary'"
         :title="title"
-        :to="to"
+        @click="$emit('click')"
       >
         <v-card-text>
           <v-img :src="src" />
@@ -20,7 +20,10 @@
   defineProps<{
     title: string
     src: string
-    to: string
+  }>()
+
+  defineEmits<{
+    (e: 'click'): void
   }>()
 </script>
 
