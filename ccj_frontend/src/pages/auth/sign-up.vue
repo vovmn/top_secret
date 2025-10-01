@@ -152,9 +152,10 @@
   async function onSubmit () {
     if (!formValid.value) return
     isLoading.value = true
-    await new Promise(resolve => setTimeout(resolve, 500))
+    await nextTick()
     try {
-      const result = await authStore.signup(formData.value)
+      const minDelay = new Promise(resolve => setTimeout(resolve, 500))
+      const [result] = await Promise.all([authStore.signup(formData.value), minDelay])
       if (result.success) {
         console.log('Успешная регистрация')
         router.push('/auth/login')

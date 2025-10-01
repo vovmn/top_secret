@@ -76,6 +76,7 @@
 
   async function clickToLogout () {
     isLoading.value = true
+    await nextTick()
     try {
       await new Promise(resolve => setTimeout(resolve, 500))
       authStore.logout()

@@ -73,9 +73,10 @@
   async function onSubmit () {
     if (!formValid.value) return
     isLoading.value = true
-    await new Promise(resolve => setTimeout(resolve, 500))
+    await nextTick()
     try {
-      const result = await authStore.login(formData.value)
+      const minDelay = new Promise(resolve => setTimeout(resolve, 500))
+      const [result] = await Promise.all([authStore.login(formData.value), minDelay])
       if (result.success) {
         console.log('Успешный вход', authStore.username)
         router.push('/')
