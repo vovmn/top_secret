@@ -20,8 +20,7 @@ namespace WSS.API.Mapping.Profiles
             // Request → Entity
             CreateMap<CreateWorkItemRequest, WorkItem>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
-                .ForMember(dest => dest.ScheduleId, opt => opt.Ignore())
-                .ForMember(dest => dest.Status, opt => opt.MapFrom(_ => WorkItemStatus.Planned));
+                .ForMember(dest => dest.ScheduleId, opt => opt.Ignore());
         }
     }
 }

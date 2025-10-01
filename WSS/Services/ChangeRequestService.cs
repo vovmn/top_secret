@@ -11,7 +11,7 @@ namespace WSS.API.Services
     /// <summary>
     /// Сервис управления запросами на изменение графика.
     /// </summary>
-    public class ChangeRequestService
+    public class ChangeRequestService : IChangeRequestService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly INotificationClient _notificationClient;

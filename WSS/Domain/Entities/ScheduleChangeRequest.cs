@@ -36,8 +36,8 @@ namespace WSS.API.Domain.Entities
         /// <summary>
         /// Новые предлагаемые даты начала и окончания.
         /// </summary>
-        public DateOnly NewStartDate { get; set; }
-        public DateOnly NewEndDate { get; set; }
+        public DateTime NewStartDate { get; set; }
+        public DateTime NewEndDate { get; set; }
 
         /// <summary>
         /// Обоснование изменения (например, "поставка материала задержана").

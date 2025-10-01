@@ -62,6 +62,13 @@ namespace WSS.API.Infrastructure.Data
                 entity.Property(r => r.Status)
                       .IsRequired()
                       .HasConversion<string>();
+                entity.HasOne<WorkItem>()
+                      .WithMany() // WorkItem может иметь много запросов на изменение
+                      .HasForeignKey(r => r.WorkItemId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasIndex(r => r.ScheduleId);
+                entity.HasIndex(r => r.Status);
             });
 
             // === WorkCompletionReport ===
@@ -74,6 +81,12 @@ namespace WSS.API.Infrastructure.Data
                 entity.Property(r => r.Longitude);
                 entity.Property(r => r.Comments);
                 entity.Property(r => r.IsVerified).IsRequired();
+                entity.HasOne<WorkItem>()
+                  .WithOne() // один к одному
+                  .HasForeignKey<WorkCompletionReport>(r => r.WorkItemId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasIndex(r => r.IsVerified);
                 // PhotoDocumentIds — хранится как JSON (см. ниже)
             });
 

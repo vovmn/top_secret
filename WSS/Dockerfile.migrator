@@ -1,0 +1,15 @@
+﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
+RUN dotnet tool install --global dotnet-ef --version 8.0.10
+
+ENV PATH="${PATH}:/root/.dotnet/tools"
+
+WORKDIR /src
+
+COPY ["WSS.API.csproj", "./"]
+
+RUN dotnet restore "WSS.API.csproj"
+
+COPY . .
+
+ENTRYPOINT ["dotnet-ef", "database", "update", "--project", "WSS.API.csproj"]

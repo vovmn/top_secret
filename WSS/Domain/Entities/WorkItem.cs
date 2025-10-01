@@ -26,22 +26,22 @@ namespace WSS.API.Domain.Entities
         /// <summary>
         /// Плановая дата начала выполнения.
         /// </summary>
-        public DateOnly PlannedStartDate { get; set; }
+        public DateTime PlannedStartDate { get; set; }
 
         /// <summary>
         /// Плановая дата окончания выполнения.
         /// </summary>
-        public DateOnly PlannedEndDate { get; set; }
+        public DateTime PlannedEndDate { get; set; }
 
         /// <summary>
         /// Фактическая дата начала (заполняется прорабом).
         /// </summary>
-        public DateOnly? ActualStartDate { get; set; }
+        public DateTime? ActualStartDate { get; set; }
 
         /// <summary>
         /// Фактическая дата окончания (заполняется прорабом).
         /// </summary>
-        public DateOnly? ActualEndDate { get; set; }
+        public DateTime? ActualEndDate { get; set; }
 
         /// <summary>
         /// Статус выполнения работы.

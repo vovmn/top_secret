@@ -11,7 +11,7 @@ namespace WSS.API.Services
     /// Сервис верификации выполненных работ службой контроля.
     /// Требует геопозиции и подтверждения нахождения на объекте.
     /// </summary>
-    public class VerificationService
+    public class VerificationService : IVerificationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IObjectManagementClient _objectClient;

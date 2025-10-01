@@ -8,19 +8,14 @@ namespace WSS.API.DTOs.Requests
     /// </summary>
     public class UpdateWorkItemRequest
     {
-        /// <summary>
-        /// Фактическая дата начала (может быть null).
-        /// </summary>
-        public DateOnly? ActualStartDate { get; set; }
-
-        /// <summary>
-        /// Фактическая дата окончания (может быть null).
-        /// </summary>
-        public DateOnly? ActualEndDate { get; set; }
-
-        /// <summary>
-        /// Новый статус работы.
-        /// </summary>
+        public Guid Id { get; set; }
+        // === Поля для прораба (фактические данные) ===
+        public DateTime? ActualStartDate { get; set; }
+        public DateTime? ActualEndDate { get; set; }
         public WorkItemStatus Status { get; set; }
+
+        // === Поля для СК (плановые данные) ===
+        public DateTime? PlannedStartDate { get; set; }
+        public DateTime? PlannedEndDate { get; set; }
     }
 }

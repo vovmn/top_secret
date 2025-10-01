@@ -12,7 +12,7 @@ namespace WSS.API.Services
     /// Основной сервис управления сетевым графиком работ.
     /// Отвечает за создание, обновление и отображение графика по объекту.
     /// </summary>
-    public class WorkScheduleService
+    public class WorkScheduleService : IWorkScheduleService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IObjectManagementClient _objectClient;
@@ -83,15 +83,32 @@ namespace WSS.API.Services
             var workItem = await _unitOfWork.WorkItems.GetByIdAsync(workItemId)
                 ?? throw new KeyNotFoundException("Работа не найдена.");
 
+            var schedule = await _unitOfWork.WorkSchedules.GetByIdAsync(workItem.ScheduleId);
+            if (schedule == null) throw new InvalidOperationException("График не найден.");
+
+            if (schedule?.Status != WorkScheduleStatus.Active)
+                throw new InvalidOperationException("График не активен.");
+
             if (workItem.Status == WorkItemStatus.Verified)
                 throw new InvalidOperationException("Работа уже подтверждена.");
 
-            // Обновляем статус и даты
-            workItem.Status = updateRequest.Status;
+            var isOnObject = await _objectClient.IsUserOnObjectAsync(
+                schedule.ObjectId,
+                reportRequest.Latitude,
+                reportRequest.Longitude);
+            if (!isOnObject)
+                throw new InvalidOperationException("Завершение работ возможно только при нахождении на объекте.");
+
+            // Проверка даты
+            var today = DateTime.UtcNow.Date;
+            if (updateRequest.ActualEndDate?.Date != today)
+                throw new InvalidOperationException("Фактическая дата завершения должна быть сегодняшней.");
+
+            // Обновление
+            workItem.Status = WorkItemStatus.Completed;
             workItem.ActualStartDate ??= updateRequest.ActualStartDate;
             workItem.ActualEndDate = updateRequest.ActualEndDate;
 
-            // Сохраняем отчёт
             var report = _mapper.Map<WorkCompletionReport>(reportRequest);
             report.WorkItemId = workItemId;
             report.ReportedBy = reportedBy;
@@ -100,10 +117,37 @@ namespace WSS.API.Services
             await _unitOfWork.WorkItems.UpdateAsync(workItem);
             await _unitOfWork.SaveChangesAsync();
 
-            // Уведомление
-            var schedule = await _unitOfWork.WorkSchedules.GetByIdAsync(workItem.ScheduleId);
-            if (schedule != null)
-                await _notificationClient.NotifyControlAboutCompletedWork(schedule.ObjectId, workItemId);
+            await _notificationClient.NotifyControlAboutCompletedWork(schedule.ObjectId, workItemId);
+        }
+
+        public async Task UpdateScheduleDirectlyAsync(Guid objectId, List<UpdateWorkItemRequest> updates, Guid updatedBy)
+        {
+            // 1. Проверяем существование и статус графика
+            var schedule = await _unitOfWork.WorkSchedules.GetByObjectIdAsync(objectId)
+                ?? throw new KeyNotFoundException("График работ не найден для указанного объекта.");
+
+            if (schedule.Status != WorkScheduleStatus.Active)
+                throw new InvalidOperationException("Изменение графика возможно только в статусе 'Активен'.");
+
+            // 2. Обновляем каждую работу
+            foreach (var update in updates)
+            {
+                var workItem = await _unitOfWork.WorkItems.GetByIdAsync(update.Id);
+                if (workItem == null || workItem.ScheduleId != schedule.Id)
+                    throw new ArgumentException($"Работа с ID {update.Id} не принадлежит графику объекта {objectId}.");
+
+                // Обновляем ТОЛЬКО плановые даты (СК не меняет фактические!)
+                if (update.PlannedStartDate.HasValue)
+                    workItem.PlannedStartDate = update.PlannedStartDate.Value.Date; // ← обрезаем время
+                if (update.PlannedEndDate.HasValue)
+                    workItem.PlannedEndDate = update.PlannedEndDate.Value.Date;
+
+                // Опционально: можно обновить и другие поля (например, Name), если нужно
+
+                await _unitOfWork.WorkItems.UpdateAsync(workItem);
+            }
+
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

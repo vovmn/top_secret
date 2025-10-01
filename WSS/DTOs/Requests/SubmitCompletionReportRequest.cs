@@ -6,6 +6,9 @@
     /// </summary>
     public class SubmitCompletionReportRequest
     {
+        public string? PhotoFileId { get; set; }
+        public string? Comment { get; set; }
+
         /// <summary>
         /// Широта местоположения при отправке (обязательна).
         /// </summary>

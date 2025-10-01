@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   db:
     image: postgis/postgis:15-3.4
@@ -16,7 +18,8 @@ services:
       timeout: 5s
       retries: 5
 
-  migrator:
+  # === COM: Construction Object Management ===
+  migrator-com:
     build:
       context: .
       dockerfile: COM.API/Dockerfile.migrator 
@@ -40,10 +43,40 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
-      migrator:
+      migrator-com:
         condition: service_completed_successfully 
     volumes:
       - ./COM.API/appsettings.json:/app/appsettings.json
+
+  # === WSS: Work Schedule & Gantt Service ===
+  migrator-wss:
+    build:
+      context: ../WSS    
+      dockerfile: Dockerfile.migrator
+    container_name: wss_api_migrator
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ../WSS/appsettings.json:/app/appsettings.json
+
+  wss.api:
+    image: wssapi:latest
+    build:
+      context: ../WSS 
+      dockerfile: Dockerfile
+    container_name: wss_api_container
+    ports:
+      - "8082:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      migrator-wss:
+        condition: service_completed_successfully
+    volumes:
+      - ../WSS/appsettings.json:/app/appsettings.json
 
 volumes:
   pgdata:
