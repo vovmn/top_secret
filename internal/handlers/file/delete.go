@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func (fh *FileHandler) DeleteFileHandler() http.HandlerFunc {
+func (fh *FileHandler) DeleteFileHandler(deleteFolderPath string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodDelete {
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -20,7 +20,7 @@ func (fh *FileHandler) DeleteFileHandler() http.HandlerFunc {
 			log.Println("Error get row", err)
 			return
 		}
-		err = entities.Delete(f.HashName, f.Format)
+		err = entities.Delete(deleteFolderPath, f.HashName, f.Format)
 		if err != nil {
 			log.Println("Error delete file", err)
 			return

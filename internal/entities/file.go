@@ -34,18 +34,18 @@ func New(name, mimeType string, size int, content []byte) *File {
 	}
 }
 
-func (f *File) Save() error {
+func (f *File) Save(uploadPath string) error {
 
-	_, err := os.Stat("uploads/")
+	_, err := os.Stat(uploadPath + "/")
 	if os.IsNotExist(err) {
-		err = os.Mkdir("uploads", 0777)
+		err = os.Mkdir(uploadPath, 0777)
 		if err != nil {
 			log.Println("Error creating uploads folder:", err)
 			return err
 		}
 	}
 
-	file, err := os.Create("uploads/" + f.HashName + "." + f.Format)
+	file, err := os.Create(uploadPath + "/" + f.HashName + "." + f.Format)
 	if err != nil {
 		return err
 	}
@@ -59,14 +59,14 @@ func (f *File) Save() error {
 	return nil
 }
 
-func Delete(filename string, format string) error {
+func Delete(deletePath, filename string, format string) error {
 	name := filename + "." + format
-	_, err := os.Stat("uploads/" + name)
+	_, err := os.Stat(deletePath + "/" + name)
 	if err != nil {
 		log.Println("File not found", err)
 		return err
 	} else {
-		err = os.Remove("uploads/" + name)
+		err = os.Remove(deletePath + "/" + name)
 		if err != nil {
 			return errors.New("ERROR while deleting")
 		}
@@ -74,13 +74,14 @@ func Delete(filename string, format string) error {
 	return nil
 }
 
-func Open(fileName string, format string) ([]byte, error) {
+func Open(openPath, fileName string, format string) ([]byte, error) {
 
-	file, err := os.Open("Uploads/" + fileName + "." + format)
+	file, err := os.Open(openPath + "/" + fileName + "." + format)
 	if err != nil {
 		log.Println("Error open file:", err)
 		return nil, err
 	}
+	defer file.Close()
 	buf, err := io.ReadAll(file)
 	if err != nil {
 		log.Println("Error read file:", err)

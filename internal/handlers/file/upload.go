@@ -7,7 +7,7 @@ import (
 	"server-storage/internal/entities"
 )
 
-func (fh *FileHandler) UploadFileHandler() http.HandlerFunc {
+func (fh *FileHandler) UploadFileHandler(uploadPath string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -22,7 +22,7 @@ func (fh *FileHandler) UploadFileHandler() http.HandlerFunc {
 		mimeType := header.Header.Get("Content-Type")
 		buf, _ := io.ReadAll(file)
 		f := entities.New(header.Filename, mimeType, int(header.Size), buf)
-		err = f.Save()
+		err = f.Save(uploadPath)
 
 		if err != nil {
 			log.Println("Error while uploading:", err)

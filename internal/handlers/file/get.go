@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func (fh *FileHandler) GetFileHandler() http.HandlerFunc {
+func (fh *FileHandler) GetFileHandler(fileFolder string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodGet {
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -20,7 +20,7 @@ func (fh *FileHandler) GetFileHandler() http.HandlerFunc {
 			log.Println("Error get row", err)
 			return
 		}
-		content, err := entities.Open(hashname, f.Format)
+		content, err := entities.Open(fileFolder, hashname, f.Format)
 		if err != nil {
 			log.Println("Error open file:", err)
 			return
