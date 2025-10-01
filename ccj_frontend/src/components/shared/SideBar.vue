@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer :color="primaryColorWhenDarkTheme" permanent>
-    <v-list>
+    <v-list v-show="isAuthenticated">
       <v-list-item
         prepend-avatar="https://randomuser.me/api/portraits/women/90.jpg"
         subtitle="sandra_a88@gmailcom"
@@ -26,7 +26,7 @@
         value="options"
       />
     </v-list>
-    <v-container v-else class="px-4 pt-7">
+    <v-container v-else class="px-4 pt-6">
       <v-btn
         block
         color="accent"
@@ -44,7 +44,14 @@
     </v-container>
     <template #append>
       <div class="pa-4">
-        <v-btn v-show="isAuthenticated" block prepend-icon="mdi-logout" @click="clickToLogout">
+        <v-btn
+          v-show="isAuthenticated"
+          block
+          elevation="2"
+          :loading="isLoading"
+          prepend-icon="mdi-logout"
+          @click="clickToLogout"
+        >
           Выйти
         </v-btn>
       </div>
@@ -65,8 +72,16 @@
   const primaryColorWhenDarkTheme = computed(() => theme.current.value.dark ? 'background' : 'primary')
   const surfaceToAccentWhenDarkTheme = computed(() => theme.current.value.dark ? 'accent' : 'surface')
 
-  function clickToLogout () {
-    authStore.logout()
+  const isLoading = ref(false)
+
+  async function clickToLogout () {
+    isLoading.value = true
+    try {
+      await new Promise(resolve => setTimeout(resolve, 500))
+      authStore.logout()
+    } finally {
+      isLoading.value = false
+    }
   }
 
 </script>

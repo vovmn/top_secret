@@ -33,7 +33,7 @@
               <v-divider />
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="success" :disabled="!formValid" @click="onSubmit">
+                <v-btn color="success" :disabled="!formValid" :loading="isLoading" @click="onSubmit">
                   Войти
                   <v-icon end icon="mdi-chevron-right" />
                 </v-btn>
@@ -68,9 +68,12 @@
   }
 
   const formValid = ref(false)
+  const isLoading = ref(false)
 
   async function onSubmit () {
     if (!formValid.value) return
+    isLoading.value = true
+    await new Promise(resolve => setTimeout(resolve, 500))
     try {
       const result = await authStore.login(formData.value)
       if (result.success) {
@@ -82,7 +85,9 @@
     } catch (error) {
       console.error('Критическая ошибка', error)
     }
+    isLoading.value = false
   }
+
 </script>
 
 <style scoped lang="sass">
