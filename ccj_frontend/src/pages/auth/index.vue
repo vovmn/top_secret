@@ -8,7 +8,7 @@
         md="12"
         sm="12"
       >
-        <h1>Войти как</h1>
+        <h1>Зарегестрироваться как</h1>
       </v-col>
       <v-col
         v-for="(card, key) in authTypeCards"
@@ -25,13 +25,8 @@
 </template>
 
 <script setup lang="ts">
+  import { authTypeCards } from '@/components/features/auth/constants/'
   import AuthLayout from '@/layouts/AuthLayout.vue'
-
-  const authTypeCards = [
-    { title: 'Заказчик', src: '/src/assets/contact-book.svg', to: '/auth/login' },
-    { title: 'Подрядчик', src: '/src/assets/document-sign.svg', to: '/auth/login' },
-    { title: 'Испектор', src: '/src/assets/online-shop-laptop.svg', to: '/auth/login' },
-  ] as const
 </script>
 
 <style scoped lang="sass">

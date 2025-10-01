@@ -7,7 +7,7 @@
         <v-col cols="12" lg="7" md="7" sm="12">
           <v-table class="rounded-sm border" striped="even">
             <tbody>
-              <tr v-for="(row, key) in Сonstants.headersAndKeysNetworkSheet" :key="key">
+              <tr v-for="(row, key) in headersAndKeysNetworkSheet" :key="key">
                 <td class="text-white" :style="`background-color: ${colors.secondary}`">
                   {{ row.header }}
                 </td>
@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
   import { useTheme } from 'vuetify'
-  import * as Сonstants from '@/components/features/building_object/constants/index'
+  import { headersAndKeysNetworkSheet } from '@/components/features/building_object/constants'
 
   import DefaultLayout from '@/layouts/DefaultLayout.vue'
 

@@ -38,7 +38,7 @@
         block
         class="mt-2"
         elevation="2"
-        to="/auth/sign-up"
+        to="/auth/"
         variant="outlined"
       >Регистрация</v-btn>
     </v-container>
@@ -61,7 +61,7 @@
 
 <script setup lang="ts">
   import { useTheme } from 'vuetify'
-  import { useAuthStore } from '@/stores/app'
+  import { useAuthStore } from '@/stores/auth'
 
   const authStore = useAuthStore()
 

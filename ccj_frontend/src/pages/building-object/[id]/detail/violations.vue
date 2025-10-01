@@ -12,7 +12,7 @@
         >
           <v-data-table
             class="rounded-sm"
-            :headers="Сonstants.headersViolations"
+            :headers="headersViolations"
             hover
             item-value="product"
             :items="checkListData"
@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-  import * as Сonstants from '@/components/features/building_object/constants/index'
+  import { headersViolations } from '@/components/features/building_object/constants'
   import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
   const checkListData = [

@@ -13,8 +13,8 @@
           <h2 class="mb-4 text-grey-lighten-1">Чек-Лист</h2>
           <v-data-table
             class="rounded-sm"
-            :group-by="Сonstants.checkListGroupBy"
-            :headers="Сonstants.headersCheckList"
+            :group-by="checkListGroupBy"
+            :headers="headersCheckList"
             hover
             item-value="product"
             :items="checkListData"
@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-  import * as Сonstants from '@/components/features/building_object/constants/index'
+  import { checkListGroupBy, headersCheckList } from '@/components/features/building_object/constants/index'
   import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
   const checkListData = [

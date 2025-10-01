@@ -107,11 +107,11 @@
 </template>
 
 <script setup lang="ts">
-  import type { SignupForm } from './types/auth_signup_types'
+  import type { SignupForm } from '../../components/features/auth/types/auth_signup_types'
   import { VMaskInput } from 'vuetify/labs/VMaskInput'
   import { phoneMask } from '@/components/features/auth/constants/auth_phone_mask'
   import AuthLayout from '@/layouts/AuthLayout.vue'
-  import { useAuthStore } from '@/stores/app'
+  import { useAuthStore } from '@/stores/auth'
 
   const router = useRouter()
 

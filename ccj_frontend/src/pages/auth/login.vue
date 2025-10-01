@@ -47,9 +47,9 @@
 </template>
 
 <script setup lang="ts">
-  import type { LoginForm } from './types/auth_login_types'
+  import type { LoginForm } from '../../components/features/auth/types/auth_login_types'
   import AuthLayout from '@/layouts/AuthLayout.vue'
-  import { useAuthStore } from '@/stores/app'
+  import { useAuthStore } from '@/stores/auth'
 
   const router = useRouter()
 

@@ -11,7 +11,7 @@
           <h2 class="mb-4 text-grey-lighten-1">Справка по объекту</h2>
           <v-table class="rounded-sm border" striped="even">
             <tbody>
-              <tr v-for="(row, key) in Сonstants.headersBuildingObject" :key="key">
+              <tr v-for="(row, key) in headersBuildingObject" :key="key">
                 <td class="text-white" :style="`background-color: ${colors.secondary}`">
                   {{ row.header }}
                 </td>
@@ -67,7 +67,7 @@
           <h2 class="mb-4 text-grey-lighten-1">Товарно-транспортная накладная</h2>
           <v-data-table
             class="rounded-sm"
-            :headers="Сonstants.headersTnn"
+            :headers="headersTnn"
             hover
             item-value="product"
             :items="tnnData"
@@ -102,7 +102,7 @@
 <script lang="ts" setup>
   import { useTheme } from 'vuetify'
 
-  import * as Сonstants from '@/components/features/building_object/constants/index'
+  import { headersBuildingObject, headersTnn } from '@/components/features/building_object/constants'
   import { activeStatuses, type StatusKey } from '@/components/shared/constants/statuses'
   import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
