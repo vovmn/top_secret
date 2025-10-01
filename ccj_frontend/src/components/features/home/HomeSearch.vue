@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-const model = defineModel<string>()
+  const model = defineModel<string>()
 </script>
 
 <style scoped lang="sass">

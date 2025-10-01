@@ -1,7 +1,7 @@
 <template>
-	<v-container class="px-10">
-		<slot />
-	</v-container>
+  <v-container class="px-10">
+    <slot />
+  </v-container>
 </template>
 
 <script setup lang="ts">

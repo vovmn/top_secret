@@ -9,23 +9,23 @@
 </template>
 
 <script setup lang="ts">
-import DefaultLayout from '@/layouts/DefaultLayout.vue'
-import { useTheme } from 'vuetify'
+  import { useTheme } from 'vuetify'
+  import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-const theme = useTheme()
+  const theme = useTheme()
 
-const isDarkTheme = computed({
-  get() {
-    return theme.global.name.value === 'dark'
-  },
-  set(value: boolean) {
-    const newTheme = value ? 'dark' : 'light'
-    theme.global.name.value = newTheme
-    localStorage.setItem('app-theme', newTheme)
-  }
-})
+  const isDarkTheme = computed({
+    get () {
+      return theme.global.name.value === 'dark'
+    },
+    set (value: boolean) {
+      const newTheme = value ? 'dark' : 'light'
+      theme.global.name.value = newTheme
+      localStorage.setItem('app-theme', newTheme)
+    },
+  })
 
-const getNotifications = ref(false);
+  const getNotifications = ref(false)
 </script>
 
 <style scoped lang="sass">

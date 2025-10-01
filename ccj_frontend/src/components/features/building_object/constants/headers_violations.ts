@@ -1,7 +1,7 @@
-export const violationsGroupBy = [{ key: 'category', order: 'asc' }] as const;
+export const violationsGroupBy = [{ key: 'category', order: 'asc' }] as const
 
 export const headersViolations = [
-  { title: 'Категория', sortable: false, key: 'category', },
+  { title: 'Категория', sortable: false, key: 'category' },
   { title: '№ объекта', key: 'id', align: 'end' },
   { title: 'Вид', key: 'view', align: 'end' },
   { title: 'Тип', key: 'type', align: 'end' },
@@ -11,4 +11,4 @@ export const headersViolations = [
   { title: 'Остановочное', key: 'workStoppage', align: 'end' },
   { title: 'Дополнение', key: 'addition', align: 'end' },
   { title: 'Данные фиксации', key: 'commitData', align: 'end' },
-] as const;
+] as const
