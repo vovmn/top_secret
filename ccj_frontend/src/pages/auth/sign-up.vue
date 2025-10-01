@@ -1,13 +1,7 @@
 <template>
   <AuthLayout>
     <v-row class="h-screen pb-16" justify="center">
-      <v-col
-        class="d-flex justify-center align-center"
-        cols="12"
-        lg="12"
-        md="12"
-        sm="12"
-      >
+      <BaseColumn class-list="d-flex justify-center align-center" cols="12">
         <v-card>
           <v-row class="pt-8" justify="center">
             <h1>Регистрация</h1>
@@ -16,13 +10,7 @@
             <v-form v-model="formValid">
               <v-container width="450">
                 <v-row>
-                  <v-col
-                    class="pb-0"
-                    cols="12"
-                    lg="4"
-                    md="4"
-                    sm="12"
-                  >
+                  <BaseColumn class-list="pb-0" cols="4">
                     <v-text-field
                       v-model="name"
                       color="info"
@@ -30,13 +18,8 @@
                       :rules="[rules.required]"
                       variant="underlined"
                     />
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    lg="4"
-                    md="4"
-                    sm="12"
-                  >
+                  </BaseColumn>
+                  <BaseColumn cols="4">
                     <v-text-field
                       v-model="surname"
                       color="info"
@@ -44,13 +27,8 @@
                       :rules="[rules.required]"
                       variant="underlined"
                     />
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    lg="4"
-                    md="4"
-                    sm="12"
-                  >
+                  </BaseColumn>
+                  <BaseColumn cols="4">
                     <v-text-field
                       v-model="fathername"
                       color="info"
@@ -58,14 +36,8 @@
                       :rules="[rules.required]"
                       variant="underlined"
                     />
-                  </v-col>
-                  <v-col
-                    class="pt-0"
-                    cols="12"
-                    lg="12"
-                    md="12"
-                    sm="12"
-                  >
+                  </BaseColumn>
+                  <BaseColumn cols="12">
                     <v-text-field
                       v-model="login"
                       color="info"
@@ -114,7 +86,7 @@
                       variant="underlined"
                       @click:append="show = !show"
                     />
-                  </v-col>
+                  </BaseColumn>
                 </v-row>
               </v-container>
 
@@ -129,13 +101,14 @@
             </v-form>
           </v-card-text>
         </v-card>
-      </v-col>
+      </BaseColumn>
     </v-row>
   </AuthLayout>
 </template>
 
 <script setup lang="ts">
   import { VMaskInput } from 'vuetify/labs/VMaskInput'
+  import { phoneMask } from '@/components/features/auth/constants/auth_phone_mask'
   import AuthLayout from '@/layouts/AuthLayout.vue'
 
   const name = ref(null)
@@ -162,16 +135,6 @@
     phoneNumber: (value: string) => {
       const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/
       return phoneRegex.test(value.trim()) || 'Неверный номер телефона'
-    },
-  }
-
-  const phoneMask = {
-    mask: '+7 (###) ###-##-##',
-    lazy: false,
-    tokens: {
-      '#': {
-        pattern: /\d/,
-      },
     },
   }
 

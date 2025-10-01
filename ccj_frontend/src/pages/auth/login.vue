@@ -1,13 +1,7 @@
 <template>
   <AuthLayout>
     <v-row class="h-screen pb-16" justify="center">
-      <v-col
-        class="d-flex justify-center align-center"
-        cols="12"
-        lg="12"
-        md="12"
-        sm="12"
-      >
+      <BaseColumn class-list="d-flex justify-center align-center" cols="12">
         <v-card>
           <v-row class="pt-8" justify="center">
             <h1>Вход</h1>
@@ -47,7 +41,7 @@
             </v-form>
           </v-card-text>
         </v-card>
-      </v-col>
+      </BaseColumn>
     </v-row>
   </AuthLayout>
 </template>
