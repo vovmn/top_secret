@@ -1,0 +1,241 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BFA595E0-96DD-E340-5A86-4ACE8ABCCFB6}|IAM.Domain\\IAM.Domain.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.domain\\valueobjects\\logininfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BFA595E0-96DD-E340-5A86-4ACE8ABCCFB6}|IAM.Domain\\IAM.Domain.csproj|solutionrelative:iam.domain\\valueobjects\\logininfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4EDDC17B-AC86-114D-5D8B-03039E8E2EBD}|IAM.Infrastructure\\IAM.Infrastructure.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.infrastructure\\data\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4EDDC17B-AC86-114D-5D8B-03039E8E2EBD}|IAM.Infrastructure\\IAM.Infrastructure.csproj|solutionrelative:iam.infrastructure\\data\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\extensions\\exceptionmiddlewareextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|solutionrelative:iam.api\\extensions\\exceptionmiddlewareextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|solutionrelative:iam.api\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|solutionrelative:iam.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|solutionrelative:iam.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|solutionrelative:iam.application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.application\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|solutionrelative:iam.application\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|solutionrelative:iam.api\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.application\\dtos\\responses\\userresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|solutionrelative:iam.application\\dtos\\responses\\userresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.application\\dtos\\requests\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|solutionrelative:iam.application\\dtos\\requests\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.application\\dtos\\requests\\getuserrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|solutionrelative:iam.application\\dtos\\requests\\getuserrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.application\\dtos\\requests\\getusersrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|solutionrelative:iam.application\\dtos\\requests\\getusersrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 230,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginInfo.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Domain\\ValueObjects\\LoginInfo.cs",
+              "RelativeDocumentMoniker": "IAM.Domain\\ValueObjects\\LoginInfo.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Domain\\ValueObjects\\LoginInfo.cs",
+              "RelativeToolTip": "IAM.Domain\\ValueObjects\\LoginInfo.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAqwGsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T21:20:56.292Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Program.cs",
+              "RelativeDocumentMoniker": "IAM.API\\Program.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Program.cs",
+              "RelativeToolTip": "IAM.API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T21:01:36.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ServiceCollectionExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Extensions\\ServiceCollectionExtensions.cs",
+              "RelativeDocumentMoniker": "IAM.API\\Extensions\\ServiceCollectionExtensions.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Extensions\\ServiceCollectionExtensions.cs",
+              "RelativeToolTip": "IAM.API\\Extensions\\ServiceCollectionExtensions.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAqwCAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T21:02:58.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ExceptionMiddlewareExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Extensions\\ExceptionMiddlewareExtensions.cs",
+              "RelativeDocumentMoniker": "IAM.API\\Extensions\\ExceptionMiddlewareExtensions.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Extensions\\ExceptionMiddlewareExtensions.cs",
+              "RelativeToolTip": "IAM.API\\Extensions\\ExceptionMiddlewareExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T21:02:35.665Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Infrastructure\\Data\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "IAM.Infrastructure\\Data\\Repositories\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Infrastructure\\Data\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "IAM.Infrastructure\\Data\\Repositories\\UserRepository.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAwwEIAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T20:56:26.414Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "IAM.API\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "IAM.API\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T20:53:10.511Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "IAM.API\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "IAM.API\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAACkAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T20:52:59.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "IAM.Application\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\Services\\UserService.cs",
+              "RelativeToolTip": "IAM.Application\\Services\\UserService.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAwwDoAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T20:35:22.107Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\Interfaces\\IUserService.cs",
+              "RelativeDocumentMoniker": "IAM.Application\\Interfaces\\IUserService.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\Interfaces\\IUserService.cs",
+              "RelativeToolTip": "IAM.Application\\Interfaces\\IUserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T20:34:08.759Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UserResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\DTOs\\Responses\\UserResponseDto.cs",
+              "RelativeDocumentMoniker": "IAM.Application\\DTOs\\Responses\\UserResponseDto.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\DTOs\\Responses\\UserResponseDto.cs",
+              "RelativeToolTip": "IAM.Application\\DTOs\\Responses\\UserResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T20:35:19.5Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "GetUserRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\DTOs\\Requests\\GetUserRequestDto.cs",
+              "RelativeDocumentMoniker": "IAM.Application\\DTOs\\Requests\\GetUserRequestDto.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\DTOs\\Requests\\GetUserRequestDto.cs",
+              "RelativeToolTip": "IAM.Application\\DTOs\\Requests\\GetUserRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T15:56:30.423Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "LoginRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\DTOs\\Requests\\LoginRequestDto.cs",
+              "RelativeDocumentMoniker": "IAM.Application\\DTOs\\Requests\\LoginRequestDto.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\DTOs\\Requests\\LoginRequestDto.cs",
+              "RelativeToolTip": "IAM.Application\\DTOs\\Requests\\LoginRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T15:57:34.036Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "GetUsersRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\DTOs\\Requests\\GetUsersRequestDto.cs",
+              "RelativeDocumentMoniker": "IAM.Application\\DTOs\\Requests\\GetUsersRequestDto.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\DTOs\\Requests\\GetUsersRequestDto.cs",
+              "RelativeToolTip": "IAM.Application\\DTOs\\Requests\\GetUsersRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T15:56:48.356Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
