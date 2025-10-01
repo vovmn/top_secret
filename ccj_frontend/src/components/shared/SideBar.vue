@@ -10,7 +10,7 @@
 
     <v-divider />
 
-    <v-list density="compact" nav>
+    <v-list v-if="isAuthenticated" density="compact" nav>
       <v-list-item
         :color="surfaceToAccentWhenDarkTheme"
         prepend-icon="mdi-domain"
@@ -25,18 +25,50 @@
         :to="'/options'"
         value="options"
       />
-      <v-spacer />
-      <v-list-item :color="surfaceToAccentWhenDarkTheme" prepend-icon="mdi-logout" title="Выйти" value="logout" />
     </v-list>
+    <v-container v-else class="px-4 pt-7">
+      <v-btn
+        block
+        color="accent"
+        elevation="2"
+        to="/auth/login"
+        variant="flat"
+      >Вход</v-btn>
+      <v-btn
+        block
+        class="mt-2"
+        elevation="2"
+        to="/auth/sign-up"
+        variant="outlined"
+      >Регистрация</v-btn>
+    </v-container>
+    <template #append>
+      <div class="pa-4">
+        <v-btn v-show="isAuthenticated" block prepend-icon="mdi-logout" @click="clickToLogout">
+          Выйти
+        </v-btn>
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script setup lang="ts">
   import { useTheme } from 'vuetify'
+  import { useAuthStore } from '@/stores/app'
+
+  const authStore = useAuthStore()
+
+  const isAuthenticated = computed(() => authStore.isAuthenticated)
 
   const theme = useTheme()
+
   const primaryColorWhenDarkTheme = computed(() => theme.current.value.dark ? 'background' : 'primary')
   const surfaceToAccentWhenDarkTheme = computed(() => theme.current.value.dark ? 'accent' : 'surface')
+
+  function clickToLogout () {
+    authStore.logout()
+  }
+
 </script>
 
 <style scoped lang="sass">

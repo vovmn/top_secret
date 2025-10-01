@@ -11,6 +11,14 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
+    restoreSession () {
+      const savedUser = localStorage.getItem('username')
+      if (savedUser) {
+        this.username = savedUser
+        this.isAuthenticated = true
+      }
+    },
+
     async login (formData: LoginForm) {
       try {
         // << Здесь запрос >>
@@ -18,7 +26,8 @@ export const useAuthStore = defineStore('auth', {
         this.isAuthenticated = true
 
         // << Токен в куки >>
-        localStorage.setItem('isAuthenticated', String(this.isAuthenticated))
+        // << Желательно httpOnly вместо localStorage >>
+        localStorage.setItem('username', this.username)
 
         return { success: true }
       } catch {
@@ -39,7 +48,7 @@ export const useAuthStore = defineStore('auth', {
     logout () {
       this.username = ''
       this.isAuthenticated = false
-      localStorage.removeItem('isAuthenticated')
+      localStorage.removeItem('username')
     },
   },
 })
