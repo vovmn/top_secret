@@ -10,14 +10,14 @@
             <v-form v-model="formValid">
               <v-container height="250" width="350">
                 <v-text-field
-                  v-model="login"
+                  v-model="formData.login"
                   color="info"
                   label="Логин"
                   :rules="[rules.required]"
                   variant="underlined"
                 />
                 <v-text-field
-                  v-model="password"
+                  v-model="formData.password"
                   :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                   color="info"
                   hint="Должен содержать минимум 8 символов"
@@ -47,10 +47,18 @@
 </template>
 
 <script setup lang="ts">
+  import type { LoginForm } from './types/auth_login_types'
   import AuthLayout from '@/layouts/AuthLayout.vue'
+  import { useAuthStore } from '@/stores/app'
 
-  const login = ref(null)
-  const password = ref(null)
+  const router = useRouter()
+
+  const authStore = useAuthStore()
+
+  const formData = ref<LoginForm>({
+    login: '',
+    password: '',
+  })
 
   const show = ref(false)
 
@@ -61,9 +69,18 @@
 
   const formValid = ref(false)
 
-  function onSubmit () {
-    if (formValid.value) {
-      console.log('Форма валидна:', { login: login.value, password: password.value })
+  async function onSubmit () {
+    if (!formValid.value) return
+    try {
+      const result = await authStore.login(formData.value)
+      if (result.success) {
+        console.log('Успешный вход', authStore.username)
+        router.push('/')
+      } else {
+        console.error('Ошибка входа', result.error)
+      }
+    } catch (error) {
+      console.error('Критическая ошибка', error)
     }
   }
 </script>

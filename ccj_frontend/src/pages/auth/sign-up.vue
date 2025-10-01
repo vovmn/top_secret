@@ -12,7 +12,7 @@
                 <v-row>
                   <BaseColumn class-list="pb-0" cols="4">
                     <v-text-field
-                      v-model="name"
+                      v-model="formData.name"
                       color="info"
                       label="Имя"
                       :rules="[rules.required]"
@@ -21,7 +21,7 @@
                   </BaseColumn>
                   <BaseColumn cols="4">
                     <v-text-field
-                      v-model="surname"
+                      v-model="formData.surname"
                       color="info"
                       label="Фамилия"
                       :rules="[rules.required]"
@@ -30,7 +30,7 @@
                   </BaseColumn>
                   <BaseColumn cols="4">
                     <v-text-field
-                      v-model="fathername"
+                      v-model="formData.fathername"
                       color="info"
                       label="Отчество"
                       :rules="[rules.required]"
@@ -39,14 +39,14 @@
                   </BaseColumn>
                   <BaseColumn cols="12">
                     <v-text-field
-                      v-model="login"
+                      v-model="formData.login"
                       color="info"
                       label="Логин"
                       :rules="[rules.required]"
                       variant="underlined"
                     />
                     <v-text-field
-                      v-model="email"
+                      v-model="formData.email"
                       color="info"
                       label="Email"
                       prepend-inner-icon="mdi-email-outline"
@@ -54,7 +54,7 @@
                       variant="underlined"
                     />
                     <v-mask-input
-                      v-model="phoneNumber"
+                      v-model="formData.phoneNumber"
                       color="info"
                       label="Телефон"
                       :mask="phoneMask"
@@ -63,7 +63,7 @@
                       variant="underlined"
                     />
                     <v-text-field
-                      v-model="password1"
+                      v-model="formData.password1"
                       :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                       color="info"
                       hint="Должен содержать минимум 8 символов"
@@ -76,7 +76,7 @@
                       @click:append="show = !show"
                     />
                     <v-text-field
-                      v-model="password2"
+                      v-model="formData.password2"
                       :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                       color="info"
                       label="Повторите пароль"
@@ -107,18 +107,26 @@
 </template>
 
 <script setup lang="ts">
+  import type { SignupForm } from './types/auth_signup_types'
   import { VMaskInput } from 'vuetify/labs/VMaskInput'
   import { phoneMask } from '@/components/features/auth/constants/auth_phone_mask'
   import AuthLayout from '@/layouts/AuthLayout.vue'
+  import { useAuthStore } from '@/stores/app'
 
-  const name = ref(null)
-  const surname = ref(null)
-  const fathername = ref(null)
-  const login = ref(null)
-  const email = ref(null)
-  const phoneNumber = ref('+7 ')
-  const password1 = ref(null)
-  const password2 = ref(null)
+  const router = useRouter()
+
+  const authStore = useAuthStore()
+
+  const formData = ref<SignupForm>({
+    name: '',
+    surname: '',
+    fathername: '',
+    login: '',
+    email: '',
+    phoneNumber: '+7 ',
+    password1: '',
+    password2: '',
+  })
 
   const show = ref(false)
 
@@ -126,7 +134,7 @@
     required: (value: string) => !!value || 'Заполните все поля.',
     min: (value: string | any[]) => value.length >= 8 || 'Пароль должен содержать минимум 8 символов',
     same: (value: string) => {
-      return value === password1.value || 'Пароли должны совпадать'
+      return value === formData.value.password1 || 'Пароли должны совпадать'
     },
     email: (value: string) => {
       const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -140,9 +148,16 @@
 
   const formValid = ref(false)
 
-  function onSubmit () {
-    if (formValid.value) {
-      console.log('Форма валидна:', { name: name.value, phoneNumber: phoneNumber.value, password: password2.value })
+  async function onSubmit () {
+    if (!formValid.value) return
+    try {
+      const result = await authStore.signup(formData.value)
+      if (result.success) {
+        console.log('Успешная регистрация')
+        router.push('/auth/login')
+      }
+    } catch (error) {
+      console.error('Критическая ошибка', error)
     }
   }
 </script>
