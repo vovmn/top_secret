@@ -1,4 +1,5 @@
 ﻿using COM.API.Domain.Entities;
+using COM.API.Domain.Enums;
 using COM.API.Infrastructure.Data;
 using COM.API.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,20 @@ namespace COM.API.Infrastructure.Repositories
         public async Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default)
         {
             return await _context.ConstructionObjects.AnyAsync(co => co.Id == id, cancellationToken);
+        }
+
+        public async Task<List<ConstructionObject>> GetAllAsync(
+           ObjectStatus? status = null,
+           CancellationToken cancellationToken = default)
+        {
+            var query = _context.ConstructionObjects.AsQueryable();
+
+            if (status.HasValue)
+            {
+                query = query.Where(o => o.Status == status.Value);
+            }
+
+            return await query.ToListAsync(cancellationToken);
         }
     }
 }

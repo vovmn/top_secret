@@ -45,5 +45,17 @@ namespace COM.API.Application.Services
                 CreatedAt = checklist.CreatedAt
             };
         }
+
+        public async Task<List<ChecklistResponse>> GetChecklistsByObjectAsync(Guid objectId, CancellationToken ct)
+        {
+            var checklists = await _unitOfWork.Checklists.GetByConstructionObjectIdAsync(objectId, ct);
+            return checklists.Select(c => new ChecklistResponse
+            {
+                Id = c.Id.ToString(),
+                FileId = c.FileId,
+                Type = c.Type,
+                CreatedAt = c.CreatedAt
+            }).ToList();
+        }
     }
 }

@@ -42,6 +42,18 @@ namespace COM.API.Controllers
             var response = await _checklistService.UploadChecklistAsync(request, cancellationToken);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Получает список всех чек-листов и актов по объекту.
+        /// </summary>
+        [HttpGet]
+        public async Task<ActionResult<List<ChecklistResponse>>> GetChecklistsByObject(
+            [FromQuery] Guid constructionObjectId,
+            CancellationToken cancellationToken = default)
+        {
+            var checklists = await _checklistService.GetChecklistsByObjectAsync(constructionObjectId, cancellationToken);
+            return Ok(checklists);
+        }
     }
     public class UploadChecklistFormRequest
     {

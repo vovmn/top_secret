@@ -139,5 +139,41 @@ namespace COM.API.Application.Services
             obj.Complete();
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
+
+        public async Task<GeoPolygon> GetObjectPolygonAsync(Guid id, CancellationToken ct)
+        {
+            var obj = await _unitOfWork.Objects.GetByIdAsync(id, ct)
+                ?? throw new KeyNotFoundException($"Объект не найден.");
+            return obj.Polygon;
+        }
+
+        public async Task<List<ConstructionObject>> GetObjectsForUserAsync(
+            Guid userId,
+            string userRole,
+            ObjectStatus? status = null,
+            CancellationToken cancellationToken = default)
+        {
+            // Загружаем объекты с включёнными связями (обязательно Include для Responsibles!)
+            var allObjects = await _unitOfWork.Objects.GetAllAsync(status, cancellationToken);
+
+            // Фильтрация по ролям согласно ТЗ
+            return userRole.ToLowerInvariant() switch
+            {
+                "construction_control" => allObjects, // СК видит все объекты (включая planned)
+
+                "foreman" => allObjects
+                    .Where(obj => obj.Responsibles
+                        .Any(r => r.Role == ResponsibleRole.Foreman && r.UserId == userId))
+                    .ToList(),
+
+                "inspector_ko" => allObjects
+                    .Where(obj => obj.Responsibles
+                        .Any(r => r.Role == ResponsibleRole.InspectorKO && r.UserId == userId))
+                    .ToList(),
+
+                _ => new List<ConstructionObject>()
+            };
+        }
+
     }
 }

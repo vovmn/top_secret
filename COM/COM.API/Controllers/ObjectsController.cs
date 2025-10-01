@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using COM.API.Application.Interfaces;
+using COM.API.Domain.Enums;
 using COM.API.DTOs.Requests;
 using COM.API.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace COM.API.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class ObjectsController(IObjectService objectService, IMapper mapper) : ControllerBase
+    public class ObjectsController(IObjectService objectService, IMapper mapper) : BaseController
     {
         private readonly IObjectService _objectService = objectService;
         private readonly IMapper _mapper = mapper;
@@ -81,6 +82,46 @@ namespace COM.API.Controllers
         {
             await _objectService.CompleteObjectAsync(id, cancellationToken);
             return NoContent();
+        }
+
+        /// <summary>
+        /// Получает список объектов, доступных текущему пользователю.
+        /// Прораб видит только свои объекты, СК — все, где он назначен или объекты в статусе Planned.
+        /// </summary>
+        [HttpGet]
+        public async Task<ActionResult<List<ObjectResponse>>> GetObjects(
+            [FromQuery] ObjectStatus? status = null,
+            CancellationToken cancellationToken = default)
+        {
+            var userId = GetUserIdFromClaims(); // из JWT
+            var userRole = GetUserRoleFromClaims(); // например: "construction_control", "foreman", "inspector_ko"
+
+            var objects = await _objectService.GetObjectsForUserAsync(userId, userRole, status, cancellationToken);
+            return Ok(_mapper.Map<List<ObjectResponse>>(objects));
+        }
+
+        /// <summary>
+        /// Возвращает полигон объекта в формате GeoJSON.
+        /// Используется для валидации геопозиции в других сервисах и отображения на карте.
+        /// </summary>
+        [HttpGet("{id:guid}/polygon")]
+        public async Task<ActionResult<GeoJsonPolygonResponse>> GetObjectPolygon(
+            [FromRoute] Guid id,
+            CancellationToken cancellationToken = default)
+        {
+            var polygon = await _objectService.GetObjectPolygonAsync(id, cancellationToken);
+
+            return Ok(new GeoJsonPolygonResponse
+            {
+                Type = "Polygon",
+                Coordinates = polygon.ToGeoJsonCoordinates()
+            });
+        }
+
+        public class GeoJsonPolygonResponse
+        {
+            public string Type { get; set; } = "Polygon";
+            public List<List<List<double>>> Coordinates { get; set; } = [];
         }
     }
 

@@ -150,5 +150,23 @@ namespace COM.API.Domain.Entities
             Address = string.Empty;
             Polygon = new GeoPolygon([new(0, 0), new(0, 1), new(1, 1), new(0, 0)]); 
         }
+
+        /// <summary>
+        /// Возвращает ID прораба, назначенного на объект, или null, если не назначен.
+        /// </summary>
+        public Guid? GetForemanUserId() =>
+            _responsibles.FirstOrDefault(r => r.Role == ResponsibleRole.Foreman)?.UserId;
+
+        /// <summary>
+        /// Возвращает ID инспектора СК, назначенного на объект, или null.
+        /// </summary>
+        public Guid? GetInspectorSKUserId() =>
+            _responsibles.FirstOrDefault(r => r.Role == ResponsibleRole.InspectorSK)?.UserId;
+
+        /// <summary>
+        /// Возвращает ID инспектора КО, назначенного на объект, или null.
+        /// </summary>
+        public Guid? GetInspectorKOUserId() =>
+            _responsibles.FirstOrDefault(r => r.Role == ResponsibleRole.InspectorKO)?.UserId;
     }
 }

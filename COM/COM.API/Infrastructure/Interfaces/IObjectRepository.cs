@@ -1,4 +1,5 @@
 ﻿using COM.API.Domain.Entities;
+using COM.API.Domain.Enums;
 
 namespace COM.API.Infrastructure.Interfaces
 {
@@ -8,5 +9,9 @@ namespace COM.API.Infrastructure.Interfaces
         Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default);
         Task<ConstructionObject?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
         Task UpdateAsync(ConstructionObject constructionObject, CancellationToken cancellationToken = default);
+
+        Task<List<ConstructionObject>> GetAllAsync(
+            ObjectStatus? status = null,
+            CancellationToken cancellationToken = default);
     }
 }

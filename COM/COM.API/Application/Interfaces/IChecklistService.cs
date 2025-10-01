@@ -6,5 +6,7 @@ namespace COM.API.Application.Interfaces
     public interface IChecklistService
     {
         Task<ChecklistResponse> UploadChecklistAsync(UploadChecklistRequest request, CancellationToken cancellationToken = default);
+
+        Task<List<ChecklistResponse>> GetChecklistsByObjectAsync(Guid objectId, CancellationToken ct);
     }
 }

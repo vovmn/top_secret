@@ -91,7 +91,23 @@ namespace COM.API.Domain.ValueObjects
 
             return new GeoPolygon(points);
         }
+
+        /// <summary>
+        /// Преобразует полигон в структуру координат, совместимую с GeoJSON.
+        /// Возвращает список колец, где каждое кольцо — это список точек [долгота, широта].
+        /// </summary>
+        public List<List<List<double>>> ToGeoJsonCoordinates()
+        {
+            // Coordinates уже замкнут (первый == последний), поэтому просто конвертируем
+            var ring = Coordinates
+                .Select(c => new List<double> { c.Longitude, c.Latitude }) // [lon, lat] — GeoJSON порядок!
+                .ToList();
+
+            return new List<List<List<double>>> { ring };
+        }
     }
+
+
 
     /// <summary>
     /// Record, представляющий географическую координату (широта, долгота).

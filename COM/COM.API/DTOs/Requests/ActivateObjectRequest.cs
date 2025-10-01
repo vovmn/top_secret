@@ -8,8 +8,9 @@
     {
         public Guid ObjectId { get; set; }
         public Guid ForemanUserId { get; set; }
-        public Guid InspectorSKUserId { get; set; }
         public Guid InspectorKOUserId { get; set; }
+
+        public Guid InspectorSKUserId { get; set; }
         public double UserLatitude { get; set; } // Для проверки геопозиции
         public double UserLongitude { get; set; }
         public Stream? ActFile { get; set; } // Файл акта открытия
