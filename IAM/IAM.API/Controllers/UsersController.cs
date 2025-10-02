@@ -21,25 +21,27 @@ namespace IAM.API.Controllers
     //// ADD ROLES
     public class UsersController(IUserService userService) : ControllerBase
     {
+        private readonly IUserService _userService = userService;
+
         // GET: /Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserResponseDto>>> GetAllUsers()
         {
-            return Ok(await userService.GetAllUsers());
+            return Ok(await _userService.GetAllUsers());
         }
 
         // GET: /Users/{param}
         [HttpGet("param")]
         public async Task<ActionResult<IEnumerable<UserResponseDto>>> GetUsers(GetUsersRequestDto request)
         {
-            return Ok(await userService.GetUsers(request));
+            return Ok(await _userService.GetUsers(request));
         }
 
         // GET: /Users/{login}
         [HttpGet("login")]
         public async Task<ActionResult<UserResponseDto>> GetUser(GetUserRequestDto request)
         {
-            return Ok(await userService.GetUser(request));
+            return Ok(await _userService.GetUser(request));
         }
 
         // PUT: api/Users/5

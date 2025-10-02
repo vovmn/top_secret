@@ -18,6 +18,10 @@ namespace IAM.Application.Services
     /// </summary>
     public class UserService(IUserRepository userRepository, IConfiguration configuration, IMapper mapper) : IUserService
     {
+        private readonly IUserRepository _userRepository = userRepository;
+        private readonly IConfiguration _configuration = configuration;
+        private readonly IMapper _mapper = mapper;
+
         public async Task<UserResponseDto?> GetUser(GetUserRequestDto request)
         {
             User? user;
@@ -25,9 +29,9 @@ namespace IAM.Application.Services
             {
                 try
                 {
-                    user = await userRepository.GetByIdAsync(Guid.Parse(request.Id));
+                    user = await _userRepository.GetByIdAsync(Guid.Parse(request.Id));
                     if (user != null)
-                        return mapper.Map<UserResponseDto>(user);
+                        return _mapper.Map<UserResponseDto>(user);
                 }
                 finally { }
             }
@@ -35,9 +39,9 @@ namespace IAM.Application.Services
             {
                 try
                 {
-                    user = await userRepository.GetByLoginAsync(request.UserName);
+                    user = await _userRepository.GetByLoginAsync(request.UserName);
                     if (user != null)
-                        return mapper.Map<UserResponseDto>(user);
+                        return _mapper.Map<UserResponseDto>(user);
                 }
                 finally { }
             }
@@ -51,14 +55,14 @@ namespace IAM.Application.Services
                 Roles role = (Roles)Enum.Parse(typeof(Roles), request.Role);
                 if (role == Roles.ADMIN || role == Roles.NONE)
                     throw new ArgumentException("Недопустимая роль");
-                return mapper.Map<IReadOnlyList<UserResponseDto>>(await userRepository.GetUsersByPrivelegesAsync(role));
+                return _mapper.Map<IReadOnlyList<UserResponseDto>>(await _userRepository.GetUsersByPrivelegesAsync(role));
             } 
             return [];
         }
 
         public async Task<IReadOnlyList<UserResponseDto>> GetAllUsers()
         {
-            return mapper.Map<IReadOnlyList<UserResponseDto>>(await userRepository.GetAllUsersAsync());
+            return _mapper.Map<IReadOnlyList<UserResponseDto>>(await _userRepository.GetAllUsersAsync());
         }
     }
 }

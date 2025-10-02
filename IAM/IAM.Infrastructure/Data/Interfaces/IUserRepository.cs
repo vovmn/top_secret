@@ -11,9 +11,11 @@ namespace IAM.Infrastructure.Data.Interfaces
         Task<bool> ExistsAsync(Guid userId);
         Task<User?> GetByIdAsync(Guid userId);
         Task<User?> GetByLoginAsync(string login);
+        Task<User?> GetByLoginInfoAsync(LoginInfo loginInfo);
         Task<IReadOnlyList<User>> GetUsersByPrivelegesAsync(Roles role);
         Task<IReadOnlyList<User>> GetAllUsersAsync();
-        Task<bool> LoginExistsAsync(LoginInfo loginInfo);
+        Task<bool> LoginExistsAsync(string login);
+        Task<bool> LoginInfoExistsAsync(LoginInfo loginInfo);
         Task PatchAsync(User user);
         Task UpdateFIOAsync(Guid userId, FIO newFIO);
         Task UpdateLoginAsync(Guid userId, LoginInfo newLogin);

@@ -26,6 +26,11 @@ namespace IAM.Application.Services
     /// </summary>
     public class AuthService(IUserRepository userRepository, IRefreshTokenRepository refreshTokenRepository, IConfiguration configuration, IMapper mapper) : IAuthService
     {
+        private readonly IUserRepository _userRepository = userRepository;
+        private readonly IRefreshTokenRepository _refreshTokenRepository = refreshTokenRepository;
+        private readonly IConfiguration _configuration = configuration;
+        private readonly IMapper _mapper = mapper;
+
         /// <summary>
         /// Регистрация пользователя
         /// </summary>
@@ -44,9 +49,16 @@ namespace IAM.Application.Services
             if (string.IsNullOrWhiteSpace(request.Password))
                 throw new ArgumentException("Не задан пароль!");
 
-            User newUser = mapper.Map<User>(request);
+            User newUser = new User(
+                        Guid.NewGuid(),
+                        new(request.UserName, request.Contacts.Email, request.Contacts.Phone),
+                        PasswordHasherService.HashPassword(request.Password),
+                        new(request.Name, request.Sername, request.Fathername),
+                        new(request.Contacts.WhatsApp, request.Contacts.VK, request.Contacts.Max, request.Contacts.Telegram, request.Contacts.Other),
+                        (Roles)Enum.Parse(typeof(Roles), request.Role!)
+                    );
 
-            await userRepository.AddAsync(newUser);
+            await _userRepository.AddAsync(newUser);
 
             return await GenerateJwtToken(newUser);
         }
@@ -62,7 +74,7 @@ namespace IAM.Application.Services
             if (string.IsNullOrWhiteSpace(request.UserName) || string.IsNullOrWhiteSpace(request.Password))
                 throw new ArgumentException("Введите данные.");
 
-            User userAccount = await userRepository.GetByLoginAsync(request.UserName)
+            User userAccount = await _userRepository.GetByLoginAsync(request.UserName)
                 ?? throw new ArgumentException("Неверный логин или пароль.");
 
             if (!PasswordHasherService.VerifyPassword(request.Password, userAccount.Password))
@@ -84,15 +96,15 @@ namespace IAM.Application.Services
             if (request.RefreshToken == null)
                 throw new ArgumentException("отсутствует токен для обновления.");
             // Проверить Guid token? (Парсинг хехе)
-            RefreshToken refreshToken = await refreshTokenRepository.GetByTokenAsync(Guid.Parse(request.RefreshToken))
+            RefreshToken refreshToken = await _refreshTokenRepository.GetByTokenAsync(Guid.Parse(request.RefreshToken))
                 ?? throw new AccessViolationException("Токен не действителен");
 
-            await refreshTokenRepository.DeleteAsync(refreshToken.Token);
+            await _refreshTokenRepository.DeleteAsync(refreshToken.Token);
 
             if (refreshToken.Validate())
                 throw new AccessViolationException("Токен не действителен");
 
-            User user = await userRepository.GetByIdAsync(refreshToken.UserId)
+            User user = await _userRepository.GetByIdAsync(refreshToken.UserId)
                ?? throw new AccessViolationException("Пользователь был удалён");
             return await GenerateJwtToken(user);
         }
@@ -105,15 +117,15 @@ namespace IAM.Application.Services
         private async Task<LoginResponseDto> GenerateJwtToken(User user)
         {
             JwtSecurityToken token = new(
-                configuration["JwtConfig:Issuer"],
-                configuration["JwtConfig:Audience"],
+                _configuration["JwtConfig:Issuer"],
+                _configuration["JwtConfig:Audience"],
                 [
                     new Claim(JwtRegisteredClaimNames.Name, user.LoginInfo.Username!),
                     new Claim(ClaimTypes.Role, user.Priveleges.ToString())
                 ],
-                expires: DateTime.UtcNow.AddMinutes(configuration.GetValue<int>("JwtConfig:TokenValidityMins")),
+                expires: DateTime.UtcNow.AddMinutes(_configuration.GetValue<int>("JwtConfig:TokenValidityMins")),
 
-                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["JwtConfig:Key"]!)),
+                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["JwtConfig:Key"]!)),
                 SecurityAlgorithms.HmacSha512Signature));
 
             JwtSecurityTokenHandler tokenHandler = new();
@@ -134,11 +146,11 @@ namespace IAM.Application.Services
         /// <returns></returns>
         private async Task<string> GenerateRefreshToken(Guid userId)
         {
-            var reftokvalmins = configuration.GetValue<int>("JwtConfig:RefreshTokenValidity");
+            var reftokvalmins = _configuration.GetValue<int>("JwtConfig:RefreshTokenValidity");
 
             var refreshToken = new RefreshToken(Guid.NewGuid(), DateTime.UtcNow.AddMinutes(reftokvalmins), userId);
 
-            await refreshTokenRepository.AddAsync(refreshToken);
+            await _refreshTokenRepository.AddAsync(refreshToken);
             return refreshToken.Token.ToString();
         }
     }

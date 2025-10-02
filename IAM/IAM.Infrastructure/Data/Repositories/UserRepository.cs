@@ -9,9 +9,11 @@ namespace IAM.Infrastructure.Data.Repositories
 {
     public class UserRepository(ApplicationDbContext context) : IUserRepository
     {
+        private readonly ApplicationDbContext _context = context;
+
         public async Task<User?> GetByIdAsync(Guid userId)
         {
-            return await context.Users
+            return await _context.Users
                 .Include(u => u.LoginInfo)
                 .Include(u => u.FIO)
                 .Include(u => u.Messengers)
@@ -20,18 +22,29 @@ namespace IAM.Infrastructure.Data.Repositories
 
         public async Task<User?> GetByLoginAsync(string login)
         {
-            return await context.Users
+            return await _context.Users
                 .Include(u => u.LoginInfo)
                 .Include(u => u.FIO)
                 .Include(u => u.Messengers)
-                .FirstOrDefaultAsync(u => u.LoginInfo.Username == login ||
-            u.LoginInfo.PhoneNumber == login ||
-            u.LoginInfo.Email == login);
+                .FirstOrDefaultAsync(u => (u.LoginInfo.Username != null && u.LoginInfo.Username == login)
+                || (u.LoginInfo.PhoneNumber != null && u.LoginInfo.PhoneNumber == login)
+                || (u.LoginInfo.Email != null && u.LoginInfo.Email == login));
+        }
+
+        public async Task<User?> GetByLoginInfoAsync(LoginInfo loginInfo)
+        {
+            return await _context.Users
+                .Include(u => u.LoginInfo)
+                .Include(u => u.FIO)
+                .Include(u => u.Messengers)
+                .FirstOrDefaultAsync(u => (u.LoginInfo.Username != null && u.LoginInfo.Username == loginInfo.Username)
+                || (u.LoginInfo.PhoneNumber != null && u.LoginInfo.PhoneNumber == loginInfo.PhoneNumber)
+                || (u.LoginInfo.Email != null && u.LoginInfo.Email == loginInfo.Email));
         }
 
         public async Task<IReadOnlyList<User>> GetUsersByPrivelegesAsync(Roles role)
         {
-            return await context.Users
+            return await _context.Users
                 .Where(u => u.Priveleges == role)
                 .Include(u => u.LoginInfo)
                 .Include(u => u.FIO)
@@ -42,7 +55,7 @@ namespace IAM.Infrastructure.Data.Repositories
 
         public async Task<IReadOnlyList<User>> GetAllUsersAsync()
         {
-            return await context.Users
+            return await _context.Users
                 .Include(u => u.LoginInfo)
                 .Include(u => u.FIO)
                 .Include(u => u.Messengers)
@@ -52,26 +65,34 @@ namespace IAM.Infrastructure.Data.Repositories
 
         public async Task<bool> ExistsAsync(Guid userId)
         {
-            return await context.Users
+            return await _context.Users
                 .AnyAsync(u => u.Id == userId);
         }
 
-        public async Task<bool> LoginExistsAsync(LoginInfo loginInfo)
+        public async Task<bool> LoginExistsAsync(string login)
         {
-            return await context.Users
-                .AnyAsync(u => u.LoginInfo.Username == loginInfo.Username
-                    || u.LoginInfo.Email == loginInfo.Email
-                    || u.LoginInfo.PhoneNumber == loginInfo.PhoneNumber);
+            return await _context.Users
+                .AnyAsync(u => (u.LoginInfo.Username != null && u.LoginInfo.Username == login)
+                || (u.LoginInfo.PhoneNumber != null && u.LoginInfo.PhoneNumber == login)
+                || (u.LoginInfo.Email != null && u.LoginInfo.Email == login));
+        }
+
+        public async Task<bool> LoginInfoExistsAsync(LoginInfo loginInfo)
+        {
+            return await _context.Users
+                .AnyAsync(u => (u.LoginInfo.Username != null && u.LoginInfo.Username == loginInfo.Username)
+                || (u.LoginInfo.PhoneNumber != null && u.LoginInfo.PhoneNumber == loginInfo.PhoneNumber)
+                || (u.LoginInfo.Email != null && u.LoginInfo.Email == loginInfo.Email));
         }
 
         public async Task AddAsync(User user)
         {
             try
             {
-                if (await LoginExistsAsync(user.LoginInfo))
+                if (await LoginInfoExistsAsync(user.LoginInfo))
                     throw new ArgumentException("Пользователь уже существует");
-                await context.Users.AddAsync(user);
-                await context.SaveChangesAsync();
+                await _context.Users.AddAsync(user);
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -83,12 +104,12 @@ namespace IAM.Infrastructure.Data.Repositories
         {
             try
             {
-                var existingUser = await context.Users.FindAsync(user.Id) ?? throw new RepositoryException("User not found");
+                var existingUser = await _context.Users.FindAsync(user.Id) ?? throw new RepositoryException("User not found");
 
                 // Update only the properties that have changed
-                context.Entry(existingUser).CurrentValues.SetValues(user);
+                _context.Entry(existingUser).CurrentValues.SetValues(user);
 
-                await context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -153,8 +174,8 @@ namespace IAM.Infrastructure.Data.Repositories
             {
                 try
                 {
-                    context.Users.Remove(user);
-                    await context.SaveChangesAsync();
+                    _context.Users.Remove(user);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateException ex)
                 {

@@ -13,12 +13,14 @@ namespace IAM.API.Controllers
     [ApiController]
     public class AccountController(IAuthService authService) : ControllerBase
     {
+        private readonly IAuthService _authService = authService;
+
         // POST api/register
         [HttpPost("Register")]
         [AllowAnonymous]
         public async Task<ActionResult<LoginResponseDto>> Register([FromBody] RegisterRequestDto request)
         {
-            return await authService.RegisterUser(request);
+            return await _authService.RegisterUser(request);
         }
 
         // POST api/Login
@@ -26,14 +28,14 @@ namespace IAM.API.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<LoginResponseDto>> Login([FromBody] LoginRequestDto request)
         {
-            return await authService.Authenticate(request);
+            return await _authService.Authenticate(request);
         }
         
         // POST api/RefreshToken
         [HttpPost("RefreshToken")]
         public async Task<ActionResult<LoginResponseDto>> RefreshToken([FromBody] RefreshTokenRequest request)
         {
-            return await authService.RefreshToken(request);
+            return await _authService.RefreshToken(request);
         }
     }
 }

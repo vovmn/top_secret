@@ -38,15 +38,16 @@ namespace IAM.Application.Mappings
 
             // === Request DTOs → Domain Entities ===
 
-            CreateMap<RegisterRequestDto, User>()
-                .ConstructUsing(src => new User(
-                    Guid.NewGuid(),
-                    new(src.UserName, src.Contacts.Email, src.Contacts.Phone),
-                    PasswordHasherService.HashPassword(src.Password!),
-                    new(src.Name, src.Sername, src.Fathername),
-                    new(src.Contacts.WhatsApp, src.Contacts.VK, src.Contacts.Max, src.Contacts.Telegram, src.Contacts.Other),
-                    (Roles)Enum.Parse(typeof(Roles), src.Role!)
-                ));
+            /*CreateMap<RegisterRequestDto, User>()
+                .ConstructUsing(src =>
+                    new User(
+                        Guid.NewGuid(),
+                        new(src.UserName, src.Contacts.Email, src.Contacts.Phone),
+                        PasswordHasherService.HashPassword(src.Password),
+                        new(src.Name, src.Sername, src.Fathername),
+                        new(src.Contacts.WhatsApp, src.Contacts.VK, src.Contacts.Max, src.Contacts.Telegram, src.Contacts.Other),
+                        (Roles)Enum.Parse(typeof(Roles), src.Role!)
+                    ));*/
 
             
 

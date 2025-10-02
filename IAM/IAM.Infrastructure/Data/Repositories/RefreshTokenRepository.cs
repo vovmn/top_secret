@@ -8,15 +8,17 @@ namespace IAM.Infrastructure.Data.Repositories
 {
     public class RefreshTokenRepository(ApplicationDbContext context) : IRefreshTokenRepository
     {
+        private readonly ApplicationDbContext _context = context;
+
         public async Task<RefreshToken?> GetByTokenAsync(Guid token, CancellationToken cancellationToken = default)
         {
-            return await context.RefreshTokens
+            return await _context.RefreshTokens
                 .FirstOrDefaultAsync(rt => rt.Token == token, cancellationToken: cancellationToken);
         }
 
         public async Task<IReadOnlyList<RefreshToken>> GetByUserIdAsync(Guid userId, CancellationToken cancellationToken = default)
         {
-            return await context.RefreshTokens
+            return await _context.RefreshTokens
                 .Where(rt => rt.UserId == userId)
                 .OrderByDescending(rt => rt.Expires)
                 .AsNoTracking()
@@ -25,7 +27,7 @@ namespace IAM.Infrastructure.Data.Repositories
 
         public async Task<bool> ExistsAsync(Guid token, CancellationToken cancellationToken = default)
         {
-            return await context.RefreshTokens
+            return await _context.RefreshTokens
                 .AnyAsync(rt => rt.Token == token, cancellationToken: cancellationToken);
         }
 
@@ -33,8 +35,8 @@ namespace IAM.Infrastructure.Data.Repositories
         {
             try
             {
-                await context.RefreshTokens.AddAsync(token, cancellationToken);
-                await context.SaveChangesAsync(cancellationToken);
+                await _context.RefreshTokens.AddAsync(token, cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
             }
             catch (DbUpdateException ex)
             {
@@ -48,15 +50,15 @@ namespace IAM.Infrastructure.Data.Repositories
 
         public async Task<bool> DeleteAsync(Guid token, CancellationToken cancellationToken = default)
         {
-            RefreshToken? refreshToken = await context.RefreshTokens
+            RefreshToken? refreshToken = await _context.RefreshTokens
                 .FirstOrDefaultAsync(rt => rt.Token == token, cancellationToken: cancellationToken);
 
             if (refreshToken == null)
                 return false;
 
-            context.RefreshTokens.Remove(refreshToken);
+            _context.RefreshTokens.Remove(refreshToken);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
             return true;
         }
 
