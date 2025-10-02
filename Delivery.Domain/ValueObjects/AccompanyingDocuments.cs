@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Delivery.Domain.ValueObjects
 {
-    sealed record AccompanyingDocuments : IEnumerable<string>, IEquatable<AccompanyingDocuments>
+    public sealed record AccompanyingDocuments : IEnumerable<string>
     {
         private readonly IReadOnlyCollection<string> _documentIds;
 
@@ -33,25 +33,6 @@ namespace Delivery.Domain.ValueObjects
         
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator(); 
-
-        // Реализация IEquatable
-        public bool Equals(AccompanyingDocuments other)
-        {
-            if (other == null) return false;
-            return _documentIds.SequenceEqual(other._documentIds);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is AccompanyingDocuments other)
-                return Equals(other);
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return _documentIds.Aggregate(0, (hash, id) => hash ^ id.GetHashCode());
-        }
 
         private AccompanyingDocuments() { }
     }

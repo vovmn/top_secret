@@ -17,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Delivery.Core\Delivery.Core.csproj" />
-    <ProjectReference Include="..\Delivery.Domain\Delivery.Domain.csproj" />
     <ProjectReference Include="..\Delivery.Infrastructure\Delivery.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -3,7 +3,7 @@
 using Delivery.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace IAM.Infrastructure.Data
+namespace Delivery.Infrastructure.Data
 {
     /// <summary>
     /// Контекст EF Core
