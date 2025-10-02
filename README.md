@@ -8,7 +8,7 @@
 🚀 [Развертывание](docs/DEPLOYMENT.md)
 
 ## 🧱 Структура проекта
-
+```mermaid
 %% Use Case Diagram
 graph TD
     subgraph Система управления строительными объектами
@@ -69,3 +69,4 @@ graph TD
         classDef actor fill:#f9f,stroke:#333,stroke-width:2px
         classDef usecase fill:#b9f,stroke:#333,stroke-width:1px
     end
+```
