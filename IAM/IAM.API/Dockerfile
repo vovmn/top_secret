@@ -21,6 +21,7 @@ RUN dotnet restore "./IAM.API/IAM.API.csproj"
 COPY . .
 WORKDIR "/src/IAM.API"
 RUN dotnet build "./IAM.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet ef database update --project IAM.API/IAM.API.csproj -s IAM.Infrastructure/IAM.Infrastructure.csproj
 
 # Этот этап используется для публикации проекта службы, который будет скопирован на последний этап
 FROM build AS publish

@@ -4,11 +4,28 @@ services:
     build:
       context: .
       dockerfile: IAM.API/Dockerfile
-
-  iam.database:
-    image: postgres:latest
-    container_name: postgres:latest
+    ports:
+      - "8081:8081"
     environment:
-     - POSTGRES_DB=user_managment_db
-     - POSTGRES_USER=postgres
-     - POSTGRES_PASSWORD=postgres
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: user_managment_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d user_managment_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:
