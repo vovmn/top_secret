@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Delivery.Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace Delivery.Domain.Entities
 {
     public sealed class DeliveryDocument
     {
+        
+
         [Required]
         public Guid Id { get; private set; }
 
@@ -34,6 +37,24 @@ namespace Delivery.Domain.Entities
         /// </summary>
         [Required]
         public string PasportId { get; private set; }
+
+        public AccompanyingDocuments AccompanyingDocuments { get; private set; }
+
+        public DeliveryDocument(Guid id, string documentNumber, string cargoType, decimal cargoVolume, string volumeUnit, DateTime shippedAt, string pasportId, AccompanyingDocuments accompanyingDocuments)
+        {
+            Id = id;
+            DocumentNumber = documentNumber;
+            CargoType = cargoType;
+            CargoVolume = cargoVolume;
+            VolumeUnit = volumeUnit;
+            ShippedAt = shippedAt;
+            PasportId = pasportId;
+            AccompanyingDocuments = accompanyingDocuments;
+        }
+
+        private DeliveryDocument()
+        {
+        }
     }
 
 }
