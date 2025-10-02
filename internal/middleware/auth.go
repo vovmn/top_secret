@@ -1,65 +1,53 @@
 package middleware
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
-	"strings"
 )
 
-type ValidateResponse struct {
-	Valid  bool   `json:"valid"`
-	UserID string `json:"user_id,omitempty"`
-	Error  string `json:"error,omitempty"`
+// Структуры для работы с IAM
+type RefreshRequest struct {
+	AccessToken string `json:"accessToken"`
 }
 
-// Middleware для проверки токена
+type RefreshResponse struct {
+	AccessToken  string `json:"accessToken"`
+	RefreshToken string `json:"refreshToken"`
+	UserName     string `json:"userName"`
+	Role         string `json:"role"`
+	ExpiresIn    int    `json:"expiresIn"`
+}
+
+// Middleware skeleton (мы проверяем токен в ForwardRequest, поэтому здесь пусто)
 func AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		token := extractToken(r)
-		if token == "" {
-			http.Error(w, "missing token", http.StatusUnauthorized)
-			return
-		}
-
-		if !validateToken(token) {
-			http.Error(w, "invalid token", http.StatusUnauthorized)
-			return
-		}
-
-		// токен валидный пускаем дальше
 		next.ServeHTTP(w, r)
 	})
 }
 
-func extractToken(r *http.Request) string {
-	authHeader := r.Header.Get("Authorization")
-	if strings.HasPrefix(authHeader, "Bearer ") {
-		return strings.TrimPrefix(authHeader, "Bearer ")
-	}
-	return ""
-}
+// Обновление токена через IAM
+func RefreshTokenIfNeeded(token string) (*RefreshResponse, error) {
+	reqBody := RefreshRequest{AccessToken: token}
+	bodyBytes, _ := json.Marshal(reqBody)
 
-func validateToken(token string) bool {
-	reqBody := strings.NewReader(fmt.Sprintf(`{"token":"%s"}`, token))
-	resp, err := http.Post("http://localhost:9000/validate", "application/json", reqBody)
+	resp, err := http.Post("http://localhost:5129/Account/RefreshToken", "application/json", bytes.NewReader(bodyBytes))
 	if err != nil {
-		fmt.Println("IAM request error:", err)
-		return false
+		return nil, err
 	}
 	defer resp.Body.Close()
 
-	body, _ := io.ReadAll(resp.Body)
+	respBytes, _ := io.ReadAll(resp.Body)
 	if resp.StatusCode != http.StatusOK {
-		fmt.Println("IAM response error:", string(body))
-		return false
+		return nil, fmt.Errorf("IAM returned status %d: %s", resp.StatusCode, string(respBytes))
 	}
 
-	var vr ValidateResponse
-	if err := json.Unmarshal(body, &vr); err != nil {
-		fmt.Println("IAM parse error:", err)
-		return false
+	var refreshResp RefreshResponse
+	if err := json.Unmarshal(respBytes, &refreshResp); err != nil {
+		return nil, err
 	}
-	return vr.Valid
+
+	return &refreshResp, nil
 }
