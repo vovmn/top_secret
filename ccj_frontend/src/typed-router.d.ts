@@ -27,6 +27,7 @@ declare module 'vue-router/auto-routes' {
     '/building-object/[id]/detail/schedule': RouteRecordInfo<'/building-object/[id]/detail/schedule', '/building-object/:id/detail/schedule', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/building-object/[id]/detail/violations': RouteRecordInfo<'/building-object/[id]/detail/violations', '/building-object/:id/detail/violations', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/options': RouteRecordInfo<'/options', '/options', Record<never, never>, Record<never, never>>,
+    '/profile': RouteRecordInfo<'/profile', '/profile', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -74,6 +75,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/options.vue': {
       routes: '/options'
+      views: never
+    }
+    'src/pages/profile.vue': {
+      routes: '/profile'
       views: never
     }
   }

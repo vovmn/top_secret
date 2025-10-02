@@ -13,6 +13,13 @@
     <v-list v-if="isAuthenticated" density="compact" nav>
       <v-list-item
         :color="surfaceToAccentWhenDarkTheme"
+        prepend-icon="mdi-account"
+        title="Профиль"
+        :to="'/profile'"
+        value="profile"
+      />
+      <v-list-item
+        :color="surfaceToAccentWhenDarkTheme"
         prepend-icon="mdi-domain"
         title="Объекты"
         :to="'/'"
