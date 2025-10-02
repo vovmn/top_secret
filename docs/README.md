@@ -6,14 +6,11 @@
 ```mermaid
 graph TD
     A[API Gateway] --> B[IAM Service]
-    A --> C[Construction Object Management]
+    A --> C[COM Service]
     A --> D[Work Schedule Service]
     A --> E[Material Delivery Service]
     A --> F[Inspection Service]
     A --> G[File Storage]
-    E -->|Events| H[Message Broker]
-    F -->|Events| H
-    H --> I[Work Schedule Service]
 ```
 
 ## 2. Сервисы системы
@@ -33,7 +30,9 @@ graph TD
 **Пример маршрута**:
 ```go
 // Обработка запросов к Construction Service
-authGroup.POST("/objects", gateway.HandleRequest(constructionServiceURL))
+authGroup.POST("/objects", func(w http.ResponseWriter, r *http.Request) {
+    ForwardRequest(w, r, "http://construction-service:8080/api")
+})
 ```
 
 ### 2.2 IAM Service (C#)
@@ -50,18 +49,16 @@ authGroup.POST("/objects", gateway.HandleRequest(constructionServiceURL))
 
 **Пример API**:
 ```csharp
-[HttpPost("login")]
-public IActionResult Login([FromBody] LoginRequest request)
+// POST api/register
+[HttpPost("Register")]
+[AllowAnonymous]
+public async Task<ActionResult<LoginResponseDto>> Register([FromBody] RegisterRequestDto request)
 {
-    // Аутентификация пользователя
-    var user = _userManager.FindByName(request.Username);
-    // Генерация JWT
-    var token = _jwtService.GenerateToken(user);
-    return Ok(new { Token = token });
+    return await _authService.RegisterUser(request);
 }
 ```
 
-### 2.3 Construction Object Management (C#)
+### 2.3 COM Service (C#)
 **Назначение**:
 - CRUD операции с объектами
 - Хранение полигонов (PostGIS)
@@ -76,10 +73,22 @@ public IActionResult Login([FromBody] LoginRequest request)
 ```csharp
 public class ConstructionObject
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public Geometry Polygon { get; set; } // PostGIS геометрия
-    public ObjectStatus Status { get; set; }
+    public Guid Id { get; private set; }
+
+    [Required]
+    public string Name { get; private set; }
+
+    [Required]
+    public string Address { get; private set; }
+
+    public ObjectStatus Status { get; private set; }
+
+    public DateTime? StartDate { get; private set; }
+
+    public DateTime? EndDate { get; private set; }
+
+    public GeoPolygon Polygon { get; private set; }
+    ...
 }
 ```
 
@@ -96,16 +105,40 @@ public class ConstructionObject
 
 **Пример обработки**:
 ```csharp
-public async Task ProcessTTN(Guid fileId)
+public async Task<TTNInfoResponseDto> ProcessImage(UploadTTNRequestDto request, CancellationToken cancellationToken = default)
 {
-    var image = await _fileService.Download(fileId);
-    var text = _ocrService.Recognize(image);
-    var material = _validator.Validate(text);
-    
-    await _eventBus.Publish(new MaterialDeliveredEvent {
-        Material = material,
-        ObjectId = material.ObjectId
-    });
+    if (request.File == null || string.IsNullOrWhiteSpace(request.FileName))
+        throw new ArgumentException("Файл не предоставлен.", nameof(request.File));
+
+    if (!AllowedImageExtensions.Contains(Path.GetExtension(request.FileName)))
+        throw new ImageProcessingException("Формат изображения не поддерживается.", new Exception());
+
+    byte[] imageData;
+    try
+    {
+        using var memoryStream = new MemoryStream();
+        request.File.CopyTo(memoryStream);
+        imageData = memoryStream.ToArray();
+    }
+    catch (IOException ex)
+    {
+        throw new InvalidOperationException("Error reading image stream", ex);
+    }
+    DeliveryDocument newdocument = await FetchFields(RecognizeText(imageData));
+
+    await docrepository.Checklists.AddAsync(newdocument, cancellationToken);
+    await docrepository.SaveChangesAsync(cancellationToken);
+
+    return new()
+    {
+        Id = newdocument.Id,
+        DocumentNumber = newdocument.DocumentNumber,
+        CargoType = newdocument.CargoType,
+        CargoVolume = newdocument.CargoVolume,
+        VolumeUnit = newdocument.VolumeUnit,
+        ShippedAt = newdocument.ShippedAt,
+        PasportId = newdocument.PasportId,
+    };
 }
 ```
 
@@ -140,7 +173,7 @@ sequenceDiagram
 
 **Результат**: 
 ```
-POST /api/auth/login
+POST /api/login
 {
     "username": "user@company.com",
     "password": "*****"
@@ -154,9 +187,7 @@ POST /api/auth/login
 
 **Пример workflow**:
 1. Загрузка изображения ТТН
-2. Распознавание данных
-3. Публикация события
-4. Создание задачи на контроль
+2. Распознавание текста
 
 ### Этап 3: Полный цикл работ
 - Реализация Inspection Service
@@ -175,15 +206,9 @@ graph TD
 ## 5. Рекомендации по развертыванию
 
 **Инфраструктура**:
-- Kubernetes кластер
-- PostgreSQL + PostGIS (HA configuration)
-- MinIO кластер
-- Kafka кластер
-
-**Мониторинг**:
-- Prometheus + Grafana
-- Логирование в ELK
-- Трейсинг через Jaeger
+- Docker compose + Kubernetes
+- PostgreSQL + PostGIS
+- MinIO контейнер
 
 ## 6. Примеры сценариев
 
@@ -192,15 +217,6 @@ graph TD
 2. Назначает ответственного
 3. Инспектор подтверждает активацию
 4. Объект появляется у прораба
-
-```json
-// Событие ObjectActivatedEvent
-{
-  "objectId": "d3b8a1d7-ff12-4a85-aa67-15c67e8a2b1d",
-  "responsible": "prokhorov@stroy.ru",
-  "activationDate": "2025-10-05T08:00:00Z"
-}
-```
 
 ### Сценарий 2: Обработка замечания
 1. Инспектор создает замечание
@@ -225,12 +241,10 @@ stateDiagram
 - Audit log для критических операций
 
 ```csharp
-[Authorize(Roles = "Inspector")]
+[Authorize(Roles = "INSPECTOR")]
 [HttpPost("remarks")]
 public IActionResult CreateRemark([FromBody] RemarkRequest request)
 {
     // Логика создания замечания
 }
 ```
-
-Документ поддерживается в актуальном состоянии. Последнее обновление: 2025-10-02
