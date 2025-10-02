@@ -1,0 +1,14 @@
+services:
+  iam.api:
+    image: ${DOCKER_REGISTRY-}iamapi
+    build:
+      context: .
+      dockerfile: IAM.API/Dockerfile
+
+  iam.database:
+    image: postgres:latest
+    container_name: postgres:latest
+    environment:
+     - POSTGRES_DB=user_managment_db
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
