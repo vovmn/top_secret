@@ -4,11 +4,11 @@
       <h1 class="font-weight-bold mb-4">Объекты</h1>
       <v-card class="pt-4" color="background" elevation="0">
         <v-row align="center" align-content="center">
-          <v-col cols="12" lg="3" md="4" sm="6">
+          <v-col cols="12" lg="3" md="12" sm="12">
             <HomeSearch v-model="search" />
           </v-col>
 
-          <v-col cols="6">
+          <v-col cols="12" lg="6" md="12" sm="12">
             <v-tabs
               v-model="tab"
               align-tabs="center"
