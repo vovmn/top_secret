@@ -3,12 +3,30 @@
   "WorkspaceRootPath": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|solutionrelative:iam.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\docker-compose.dcproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|solutionrelative:docker-compose.dcproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|solutionrelative:iam.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|solutionrelative:iam.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\sacra\\source\\repos\\top_secret\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +43,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.application\\services\\passwordhasherservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{87DB1900-74C0-B3E6-7B33-45C39AD85F60}|IAM.Application\\IAM.Application.csproj|solutionrelative:iam.application\\services\\passwordhasherservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|solutionrelative:iam.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -110,35 +124,48 @@
       "DocumentGroups": [
         {
           "DockedWidth": 230,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
+              "Title": "Microsoft.VisualStudio.Docker.Compose.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
+              "ViewState": "AgIAAJcBAAAAAAAAAAAawLcBAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-10-02T01:43:13.949Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "docker-compose.dcproj",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\docker-compose.dcproj",
+              "RelativeDocumentMoniker": "docker-compose.dcproj",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\docker-compose.dcproj",
+              "RelativeToolTip": "docker-compose.dcproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-10-02T01:31:22.045Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\appsettings.json",
               "RelativeDocumentMoniker": "IAM.API\\appsettings.json",
               "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\appsettings.json",
               "RelativeToolTip": "IAM.API\\appsettings.json",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAkwA8AAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-02T00:26:55.375Z"
+              "WhenOpened": "2025-10-02T00:26:55.375Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PasswordHasherService.cs",
-              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\Services\\PasswordHasherService.cs",
-              "RelativeDocumentMoniker": "IAM.Application\\Services\\PasswordHasherService.cs",
-              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\Services\\PasswordHasherService.cs",
-              "RelativeToolTip": "IAM.Application\\Services\\PasswordHasherService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T23:33:50.023Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "ExceptionMiddlewareExtensions.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Extensions\\ExceptionMiddlewareExtensions.cs",
               "RelativeDocumentMoniker": "IAM.API\\Extensions\\ExceptionMiddlewareExtensions.cs",
@@ -150,7 +177,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Infrastructure\\Data\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "IAM.Infrastructure\\Data\\Repositories\\UserRepository.cs",
@@ -162,7 +189,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "IAM.API\\Controllers\\AccountController.cs",
@@ -174,7 +201,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "IUserService.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\Interfaces\\IUserService.cs",
               "RelativeDocumentMoniker": "IAM.Application\\Interfaces\\IUserService.cs",
@@ -186,7 +213,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "IAM.Application\\Services\\AuthService.cs",
@@ -198,7 +225,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "IAM.Application\\Services\\UserService.cs",
@@ -210,7 +237,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 25,
               "Title": "UserResponseDto.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\DTOs\\Responses\\UserResponseDto.cs",
               "RelativeDocumentMoniker": "IAM.Application\\DTOs\\Responses\\UserResponseDto.cs",
@@ -222,7 +249,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Program.cs",
+              "RelativeDocumentMoniker": "IAM.API\\Program.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Program.cs",
+              "RelativeToolTip": "IAM.API\\Program.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACwAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T21:01:36.017Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Dockerfile",
+              "RelativeDocumentMoniker": "IAM.API\\Dockerfile",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Dockerfile",
+              "RelativeToolTip": "IAM.API\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-10-01T21:35:46.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "docker-compose.yml",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\docker-compose.yml",
+              "RelativeDocumentMoniker": "docker-compose.yml",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\docker-compose.yml",
+              "RelativeToolTip": "docker-compose.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-10-02T01:02:44.07Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PasswordHasherService.cs",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\Services\\PasswordHasherService.cs",
+              "RelativeDocumentMoniker": "IAM.Application\\Services\\PasswordHasherService.cs",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\Services\\PasswordHasherService.cs",
+              "RelativeToolTip": "IAM.Application\\Services\\PasswordHasherService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T23:33:50.023Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\.gitignore",
+              "RelativeDocumentMoniker": "..\\.gitignore",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\.gitignore",
+              "RelativeToolTip": "..\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-10-02T01:13:24.091Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "IAM.API\\Controllers\\UsersController.cs",
@@ -234,7 +321,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "ServiceCollectionExtensions.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Extensions\\ServiceCollectionExtensions.cs",
               "RelativeDocumentMoniker": "IAM.API\\Extensions\\ServiceCollectionExtensions.cs",
@@ -246,33 +333,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Program.cs",
-              "RelativeDocumentMoniker": "IAM.API\\Program.cs",
-              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Program.cs",
-              "RelativeToolTip": "IAM.API\\Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T21:01:36.017Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Dockerfile",
-              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Dockerfile",
-              "RelativeDocumentMoniker": "IAM.API\\Dockerfile",
-              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Dockerfile",
-              "RelativeToolTip": "IAM.API\\Dockerfile",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-01T21:35:46.542Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "IAM.Domain.csproj",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Domain\\IAM.Domain.csproj",
               "RelativeDocumentMoniker": "IAM.Domain\\IAM.Domain.csproj",
@@ -284,7 +345,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "Roles.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Domain\\Enums\\Roles.cs",
               "RelativeDocumentMoniker": "IAM.Domain\\Enums\\Roles.cs",
@@ -296,7 +357,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "LoginResponseDto.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\DTOs\\Responses\\LoginResponseDto.cs",
               "RelativeDocumentMoniker": "IAM.Application\\DTOs\\Responses\\LoginResponseDto.cs",
@@ -308,7 +369,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 22,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Infrastructure\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "IAM.Infrastructure\\Data\\ApplicationDbContext.cs",
@@ -320,7 +381,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "IAM.API\\Properties\\launchSettings.json",
@@ -332,7 +393,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "RefreshTokenRepository.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Infrastructure\\Data\\Repositories\\RefreshTokenRepository.cs",
               "RelativeDocumentMoniker": "IAM.Infrastructure\\Data\\Repositories\\RefreshTokenRepository.cs",
@@ -344,7 +405,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "MappingProfile.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\Mappings\\MappingProfile.cs",
               "RelativeDocumentMoniker": "IAM.Application\\Mappings\\MappingProfile.cs",
@@ -356,7 +417,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 23,
               "Title": "IUserRepository.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Infrastructure\\Data\\Interfaces\\IUserRepository.cs",
               "RelativeDocumentMoniker": "IAM.Infrastructure\\Data\\Interfaces\\IUserRepository.cs",
@@ -368,7 +429,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 24,
               "Title": "LoginInfo.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Domain\\ValueObjects\\LoginInfo.cs",
               "RelativeDocumentMoniker": "IAM.Domain\\ValueObjects\\LoginInfo.cs",
@@ -380,7 +441,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 26,
               "Title": "LoginRequestDto.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\DTOs\\Requests\\LoginRequestDto.cs",
               "RelativeDocumentMoniker": "IAM.Application\\DTOs\\Requests\\LoginRequestDto.cs",
@@ -392,7 +453,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 27,
               "Title": "GetUserRequestDto.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\DTOs\\Requests\\GetUserRequestDto.cs",
               "RelativeDocumentMoniker": "IAM.Application\\DTOs\\Requests\\GetUserRequestDto.cs",
@@ -404,7 +465,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 28,
               "Title": "GetUsersRequestDto.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.Application\\DTOs\\Requests\\GetUsersRequestDto.cs",
               "RelativeDocumentMoniker": "IAM.Application\\DTOs\\Requests\\GetUsersRequestDto.cs",
