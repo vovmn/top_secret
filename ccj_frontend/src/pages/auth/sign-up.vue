@@ -2,14 +2,14 @@
   <AuthLayout>
     <v-row class="h-screen pb-16" justify="center">
       <BaseColumn class-list="d-flex justify-center align-center" cols="12">
-        <v-card>
+        <v-card :class="mobile ? 'mx-4' : ''">
           <v-row class="pt-8" justify="center">
             <h1>Регистрация</h1>
           </v-row>
           <v-card-text>
             <v-form v-model="formValid">
-              <v-container width="450">
-                <v-row>
+              <v-container :width="mobile ? '' : 450">
+                <v-row class="mx-8">
                   <BaseColumn class-list="pb-0" cols="4">
                     <v-text-field
                       v-model="formData.name"
@@ -108,6 +108,7 @@
 
 <script setup lang="ts">
   import type { SignupForm } from '../../components/features/auth/types/auth_signup_types'
+  import { useDisplay } from 'vuetify'
   import { VMaskInput } from 'vuetify/labs/VMaskInput'
   import { phoneMask } from '@/components/features/auth/constants/auth_phone_mask'
   import AuthLayout from '@/layouts/AuthLayout.vue'
@@ -179,6 +180,8 @@
     }
     isLoading.value = false
   }
+
+  const { mobile } = useDisplay()
 </script>
 
 <style scoped lang="sass">
