@@ -16,6 +16,7 @@ declare module 'vue' {
     BuildingObjectGanttChart: typeof import('./components/features/building_object/BuildingObjectGanttChart.vue')['default']
     HomeObjectCard: typeof import('./components/features/home/HomeObjectCard.vue')['default']
     HomeSearch: typeof import('./components/features/home/HomeSearch.vue')['default']
+    MobileAppBar: typeof import('./components/shared/MobileAppBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SideBar: typeof import('./components/shared/SideBar.vue')['default']
