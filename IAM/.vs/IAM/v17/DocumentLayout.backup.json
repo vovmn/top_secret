@@ -3,6 +3,9 @@
   "WorkspaceRootPath": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\sacra\\source\\repos\\top_secret\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|solutionrelative:iam.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -24,9 +27,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|solutionrelative:iam.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\sacra\\source\\repos\\top_secret\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DE1FE74E-6354-9590-BA04-5931489777EA}|IAM.API\\IAM.API.csproj|c:\\users\\sacra\\source\\repos\\top_secret\\iam\\iam.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -124,23 +124,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 230,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Microsoft.VisualStudio.Docker.Compose.targets",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
-              "ViewState": "AgIAAJcBAAAAAAAAAAAawLcBAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2025-10-02T01:43:13.949Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "docker-compose.dcproj",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\docker-compose.dcproj",
               "RelativeDocumentMoniker": "docker-compose.dcproj",
@@ -152,7 +140,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\appsettings.json",
               "RelativeDocumentMoniker": "IAM.API\\appsettings.json",
@@ -173,7 +161,8 @@
               "RelativeToolTip": "IAM.API\\Extensions\\ExceptionMiddlewareExtensions.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T21:02:35.665Z"
+              "WhenOpened": "2025-10-01T21:02:35.665Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -185,7 +174,8 @@
               "RelativeToolTip": "IAM.Infrastructure\\Data\\Repositories\\UserRepository.cs",
               "ViewState": "AgIAADcAAAAAAAAAAAAAAFoAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T20:56:26.414Z"
+              "WhenOpened": "2025-10-01T20:56:26.414Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -197,7 +187,8 @@
               "RelativeToolTip": "IAM.API\\Controllers\\AccountController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T20:53:10.511Z"
+              "WhenOpened": "2025-10-01T20:53:10.511Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -209,7 +200,8 @@
               "RelativeToolTip": "IAM.Application\\Interfaces\\IUserService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T20:34:08.759Z"
+              "WhenOpened": "2025-10-01T20:34:08.759Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -221,7 +213,8 @@
               "RelativeToolTip": "IAM.Application\\Services\\AuthService.cs",
               "ViewState": "AgIAAFwAAAAAAAAAAAAcwDMAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T22:16:51.633Z"
+              "WhenOpened": "2025-10-01T22:16:51.633Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -233,7 +226,8 @@
               "RelativeToolTip": "IAM.Application\\Services\\UserService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAwwCAAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T20:35:22.107Z"
+              "WhenOpened": "2025-10-01T20:35:22.107Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -245,11 +239,12 @@
               "RelativeToolTip": "IAM.Application\\DTOs\\Responses\\UserResponseDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T20:35:19.5Z"
+              "WhenOpened": "2025-10-01T20:35:19.5Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Program.cs",
               "RelativeDocumentMoniker": "IAM.API\\Program.cs",
@@ -257,11 +252,12 @@
               "RelativeToolTip": "IAM.API\\Program.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAACwAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T21:01:36.017Z"
+              "WhenOpened": "2025-10-01T21:01:36.017Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Dockerfile",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\IAM.API\\Dockerfile",
               "RelativeDocumentMoniker": "IAM.API\\Dockerfile",
@@ -269,11 +265,12 @@
               "RelativeToolTip": "IAM.API\\Dockerfile",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-01T21:35:46.542Z"
+              "WhenOpened": "2025-10-01T21:35:46.542Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "docker-compose.yml",
               "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\IAM\\docker-compose.yml",
               "RelativeDocumentMoniker": "docker-compose.yml",
@@ -281,7 +278,33 @@
               "RelativeToolTip": "docker-compose.yml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
-              "WhenOpened": "2025-10-02T01:02:44.07Z"
+              "WhenOpened": "2025-10-02T01:02:44.07Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\.gitignore",
+              "RelativeDocumentMoniker": "..\\.gitignore",
+              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\.gitignore",
+              "RelativeToolTip": "..\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-10-02T01:13:24.091Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Microsoft.VisualStudio.Docker.Compose.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
+              "ViewState": "AgIAAJcBAAAAAAAAAAAawLcBAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-10-02T01:43:13.949Z"
             },
             {
               "$type": "Document",
@@ -293,19 +316,8 @@
               "RelativeToolTip": "IAM.Application\\Services\\PasswordHasherService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T23:33:50.023Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": ".gitignore",
-              "DocumentMoniker": "C:\\Users\\sacra\\source\\repos\\top_secret\\.gitignore",
-              "RelativeDocumentMoniker": "..\\.gitignore",
-              "ToolTip": "C:\\Users\\sacra\\source\\repos\\top_secret\\.gitignore",
-              "RelativeToolTip": "..\\.gitignore",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-02T01:13:24.091Z"
+              "WhenOpened": "2025-10-01T23:33:50.023Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -317,7 +329,8 @@
               "RelativeToolTip": "IAM.API\\Controllers\\UsersController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAABqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T20:52:59.657Z"
+              "WhenOpened": "2025-10-01T20:52:59.657Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -329,7 +342,8 @@
               "RelativeToolTip": "IAM.API\\Extensions\\ServiceCollectionExtensions.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAABkAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T21:02:58.613Z"
+              "WhenOpened": "2025-10-01T21:02:58.613Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -353,7 +367,8 @@
               "RelativeToolTip": "IAM.Domain\\Enums\\Roles.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-02T00:31:46.415Z"
+              "WhenOpened": "2025-10-02T00:31:46.415Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -365,7 +380,8 @@
               "RelativeToolTip": "IAM.Application\\DTOs\\Responses\\LoginResponseDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T23:31:50.761Z"
+              "WhenOpened": "2025-10-01T23:31:50.761Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -377,7 +393,8 @@
               "RelativeToolTip": "IAM.Infrastructure\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T23:34:39.365Z"
+              "WhenOpened": "2025-10-01T23:34:39.365Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -389,7 +406,8 @@
               "RelativeToolTip": "IAM.API\\Properties\\launchSettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-02T00:26:23.149Z"
+              "WhenOpened": "2025-10-02T00:26:23.149Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -401,7 +419,8 @@
               "RelativeToolTip": "IAM.Infrastructure\\Data\\Repositories\\RefreshTokenRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T23:35:13.909Z"
+              "WhenOpened": "2025-10-01T23:35:13.909Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -413,7 +432,8 @@
               "RelativeToolTip": "IAM.Application\\Mappings\\MappingProfile.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAADMAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T23:56:43.381Z"
+              "WhenOpened": "2025-10-01T23:56:43.381Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -425,7 +445,8 @@
               "RelativeToolTip": "IAM.Infrastructure\\Data\\Interfaces\\IUserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T23:45:11.549Z"
+              "WhenOpened": "2025-10-01T23:45:11.549Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -437,7 +458,8 @@
               "RelativeToolTip": "IAM.Domain\\ValueObjects\\LoginInfo.cs",
               "ViewState": "AgIAAG0AAAAAAAAAAADwv4cAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T21:20:56.292Z"
+              "WhenOpened": "2025-10-01T21:20:56.292Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -449,7 +471,8 @@
               "RelativeToolTip": "IAM.Application\\DTOs\\Requests\\LoginRequestDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T15:57:34.036Z"
+              "WhenOpened": "2025-10-01T15:57:34.036Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -461,7 +484,8 @@
               "RelativeToolTip": "IAM.Application\\DTOs\\Requests\\GetUserRequestDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T15:56:30.423Z"
+              "WhenOpened": "2025-10-01T15:56:30.423Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -473,7 +497,8 @@
               "RelativeToolTip": "IAM.Application\\DTOs\\Requests\\GetUsersRequestDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T15:56:48.356Z"
+              "WhenOpened": "2025-10-01T15:56:48.356Z",
+              "EditorCaption": ""
             }
           ]
         }
